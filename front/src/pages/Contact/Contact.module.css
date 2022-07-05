@@ -1,0 +1,95 @@
+.labels{
+  margin-bottom: -3%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 35px;
+  text-shadow: black 5px 0 10px;
+}
+.default {
+  margin-bottom: 251px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+      }
+.contactform{
+width: 20%;
+padding: 1.5em 1em;
+        border-radius: 0.3rem;
+        font-size: 1.2rem;
+      }
+.contactform input,
+.contactform textarea,
+.contactform button {
+
+  resize: none;
+  width: 100%;
+  padding: .5rem .3rem;
+  margin: 1em 0 0;
+  border-radius: 0.3rem;
+  background-color: white;
+  font-size: 1.5rem;
+}
+  .email{ padding: 10px;
+    border-radius: 8px;
+    background: #F2994A;
+    
+  }
+ .email::placeholder{
+  background: #F2994A;
+  color: black;
+  font-weight: 600;
+font-size: 15px;
+  }
+  .usuario{ padding: 10px;
+    border-radius: 8px;
+    background: #ffb347; 
+    background: #F2994A;
+    
+  }
+ .usuario::placeholder{
+  background: #F2994A;
+  color: black;
+  font-weight: 600;
+font-size: 15px;
+  }
+
+  .boton{
+    background: #F2994A;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: 15px;
+    }
+    .boton:hover{
+      font-weight: 700;
+      background: #8e9eab; 
+      background: #F2994A;
+      
+    }
+    
+    @media only screen and (max-width: 768px) {
+      .default {
+        display: flex;
+   }
+   .contactform{
+     width: 20%;
+     padding: 1.5em 1em;
+             border-radius: 0.3rem;
+             font-size: 1.2rem;
+           }
+   .contactform input,
+   .contactform textarea,
+   .contactform button {
+   
+    font-size: 15px;
+     resize: none;
+     width: 100%;
+     padding: .5rem .3rem;
+     margin: 1em 0 0;
+     border-radius: 0.3rem;
+     background-color: white;
+     font-size: 1.5rem;
+   }
+      }

@@ -1,0 +1,123 @@
+.publicaciones {
+  width: 23%;
+  margin: 10px 1%;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 25px;
+  text-shadow: black 5px 0 10px;
+}
+.ingredientes {
+  text-shadow: black 5px 0 10px;
+}
+.seccion {
+  display: flex;
+  flex-wrap: wrap;
+}
+.seccion1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+img {
+  width: 100%;
+  height: auto;
+  margin-top: 3px;
+}
+.imagenes img {
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 4/4;
+}
+.imagen img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+  width: 350px;
+  height: 350px;
+}
+
+.titulo {
+  font-size: 35px;
+  text-align: center;
+  padding: 10px 0px;
+  line-height: 35px;
+}
+
+.resumenes {
+  text-shadow: black 5px 0 10px;
+}
+.valoraciones {
+  text-shadow: black 5px 0 10px;
+}
+
+@media only screen and (max-width: 981px) {
+  .valoraciones {
+    padding: 15px 3%;
+    width: 50%;
+  }
+
+  .titulo {
+    margin-top: -15px;
+    font-size: 26px;
+    text-align: center;
+  }
+  .imagen img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+  }
+  .publicacion{
+    width: 50%;
+  }
+}
+
+.publicacion {
+  width: 25%;
+  margin: 10px 1%;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 25px;
+  text-shadow: black 5px 0 10px;
+}
+@media only screen and (max-width: 768px) {
+  .publicaciones {
+    font-size: 13px;
+  }
+  .imagen img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+    width: 350px;
+    height: 350px;
+  }
+  .publicacion{
+    font-size: 18px;
+    width: 70%;
+  }
+  .ingredientes{
+    width: 100%;
+    height: auto;
+  }
+  .seccion1 {
+    justify-content: center;
+    display: flex;
+  }
+}
+@media only screen and (max-width: 568px){
+  .publicacion{
+    width: 70%;
+  }
+}
+
+.linkpu{
+  text-decoration: none;
+  color: white;
+  text-shadow: black 5px 0 10px;
+  font-size: 55px;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}

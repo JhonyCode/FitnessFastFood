@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valoraciones index{% endblock %}
+
+{% block body %}
+    <h1>Valoraciones index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for valoracione in valoraciones %}
+            <tr>
+                <td>{{ valoracione.id }}</td>
+                <td>{{ valoracione.numero }}</td>
+                <td>
+                    <a href="{{ path('app_admin_valoraciones_show', {'id': valoracione.id}) }}">show</a>
+                    <a href="{{ path('app_admin_valoraciones_edit', {'id': valoracione.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_valoraciones_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+.userlist{
+    font-size: 19px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 423px;
+    color: white;
+    text-shadow: black 5px 0 10px;
+}
+.userlist img {
+    width: 150px;
+    height: 150px;
+}
+
+.links{
+    text-decoration: none;
+    text-shadow: black 5px 0 10px;
+    color: white;
+}
+
+.userlist1{
+    font-size: 19px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 592px;
+    color: white;
+    text-shadow: black 5px 0 10px;
+}

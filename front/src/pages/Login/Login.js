@@ -1,0 +1,65 @@
+import { useContext, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import { AuthContext } from "../../components/AuthContext";
+import { Link } from "react-router-dom";
+import styles from "../Login/Login.module.css"
+
+const Login = () => {
+  const navigate = useNavigate();
+  const { token, setToken } = useContext(AuthContext);
+  const [formValues, setFormValues] = useState({ username: "", password: "" });
+  const handleInputChange = (e) => {
+    setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:8080/api/login_check", {
+      method: "POST",
+      body: JSON.stringify(formValues),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setToken(data.token);
+        navigate("/", { replace: true });
+      });
+
+  };
+
+  // if (!token) return <Navigate to="/register"replace />;
+
+  return (
+    <>
+      <h1>Formulario de Login</h1>
+      <div className={styles.login}>
+        <form  className={styles.contactform} onSubmit={handleSubmit}>
+          <label className={styles.labels} htmlFor="username">Email</label>
+          <input className={styles.user}
+           required={true}
+            id="username"
+            name="username"
+            type="email"
+            onChange={handleInputChange}
+            value={formValues.username}
+            placeholder="Introduce tu email"
+          />
+          <label className={styles.labels} htmlFor="password">Contraseña</label>
+          <input className={styles.password}
+           required={true}
+            id="password"
+            name="password"
+            type="password"
+            onChange={handleInputChange}
+            values={formValues.password}
+            placeholder="Introduce tu contraseña"
+          />
+          <button className={styles.boton} type="submit">Iniciar sesión</button>
+          <div className={styles.links}><Link to="/register">Crea una cuenta</Link></div>
+        </form>
+      </div>
+    </>
+  );
+};
+export default Login;

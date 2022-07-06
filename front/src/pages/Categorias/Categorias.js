@@ -13,11 +13,6 @@ function Categorias() {
   }, []);
   return (
     <div>
-      <div className="backgroundvideo">
-        <video autoPlay="yes" muted preload="yes">
-          <source src="./video.mp4" type="video/mp4" />
-        </video>
-      </div>
       <section className="seccion">
         {Categorias.map((categoria) => (
           <div className="publicaciones" key={categoria.id}>

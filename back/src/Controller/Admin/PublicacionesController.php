@@ -7,6 +7,7 @@ use App\Entity\Usuario;
 use App\Form\PublicacionesType;
 use App\Repository\PublicacionesRepository;
 use App\Repository\UsuarioRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +22,18 @@ class PublicacionesController extends AbstractController
     /**
      * @Route("/", name="app_admin_publicaciones_index", methods={"GET"})
      */
-    public function index(PublicacionesRepository $publicacionesRepository): Response
+    public function index(PublicacionesRepository $publicacionesRepository, Request $request): Response
     {
-        $publicacione = $publicacionesRepository->findAll();
+        //?page=1&limit=4
+
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 20);
+
+        //calculamos el offset de los registros
+        $offset = ($page-1)*$limit;
+
+        //$publicacione = $publicacionesRepository->findAll();
+        $publicacione = $publicacionesRepository->findBy([],['id'=>'DESC'],$limit, $offset);
         $resultado = [];
         foreach ($publicacione as $c) {
             $resultado[] = [
@@ -36,7 +46,7 @@ class PublicacionesController extends AbstractController
                 "estado" => $c->getEstado(),
                 "resumen" => 'Elaboración: ' . $c->getResumen(),
                 "valoracion" => 'Valoración: ' . $c->getValoracion()->getNumero(),
-                'comentario' => 'Valor nutricional' . $c->getComentario()->getTexto()
+                'comentario' => 'Valor nutricional' . $c->getValorNutricional()
             ];
         }
         return $this->json(['result' => $resultado]);
@@ -45,21 +55,39 @@ class PublicacionesController extends AbstractController
     /**
      * @Route("/new", name="app_admin_publicaciones_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, PublicacionesRepository $publicacionesRepository): Response
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
-        $publicacione = new Publicaciones();
-        $form = $this->createForm(PublicacionesType::class, $publicacione);
-        $form->handleRequest($request);
+        /** @var User $user */
+        $usuario = $this->getUser();
+        $resultado = "ko";
+        $publicacionTitulo = $request->request->get("titulo");
+        $publicacionResumen = $request->request->get("resumen");
+        $publicacionIngredientes = $request->request->get("ingredientes");
+        $imagen = $request->files->get('imagen');
+        
+        if(!empty($publicacionTitulo)){
+            $nombreImagen = '';
+            if (!empty($imagen)) {
+                if (!empty($imagen->getClientOriginalName())) {
+                    $nombreImagen = uniqid() . '_' . strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                    $imagen->move('uploads/', $nombreImagen);
+                }
+            }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $publicacionesRepository->add($publicacione, true);
-
-            return $this->redirectToRoute('app_admin_publicaciones_index', [], Response::HTTP_SEE_OTHER);
+            $publicacion = new Publicaciones();
+            
+            $publicacion->setUsuario($usuario);
+            $publicacion->setTitulo($publicacionTitulo);
+            $publicacion->setResumen($publicacionResumen);
+            $publicacion->setIngredientes($publicacionIngredientes);
+            $publicacion->setImagen($nombreImagen);
+            $publicacion->setSlug("publicacion". uniqid());
+            
+            $em->persist($publicacion);
+            $em->flush();
         }
-
-        return $this->renderForm('admin/publicaciones/new.html.twig', [
-            'publicacione' => $publicacione,
-            'form' => $form,
+        return $this->json([
+            'resultado' => $resultado
         ]);
     }
 
@@ -78,7 +106,7 @@ class PublicacionesController extends AbstractController
             "estado" => $publicacione->getEstado(),
             "resumen" => 'Elaboración: ' . $publicacione->getResumen(),
             "valoracion" => 'Valoración: ' . $publicacione->getValoracion()->getNumero(),
-            'comentario' => 'Valor nutricional: ' . $publicacione->getComentario()->getTexto()
+            'comentario' => 'Valor nutricional: ' . $publicacione->getValorNutricional()
         
         ];
     

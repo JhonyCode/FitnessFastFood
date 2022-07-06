@@ -17,7 +17,6 @@ class PublicacionesType extends AbstractType
             ->add('slug')
             ->add('titulo')
             ->add('categoria')
-            ->add('comentario')
             ->add('usuario')
         ;
     }

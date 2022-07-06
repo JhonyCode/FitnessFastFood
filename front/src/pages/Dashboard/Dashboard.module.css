@@ -1,13 +1,26 @@
 .box{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
-.imgas{
-  width: 150px;
-  height: 150px;
+.imgas img {
+  width: 100%;
+  height: auto;
+  margin-top: 3px;
+  border-radius: 3%;
+}
+.user{
+  width: 35%;
+  margin: 10px 5%;
+  text-align: center;
+  color: white;
+  text-shadow: black 5px 0 10px;
+  font-weight: 700;
+  font-size: 25px;
 }
 .nombre{
   font-size: 35px;
+  margin-bottom: 5%;
 }
 .boton{
   font-weight: 600;

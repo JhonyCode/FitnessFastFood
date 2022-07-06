@@ -1,41 +1,62 @@
-import { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../../components/AuthContext";
+import { useState, useEffect } from "react";
 import styles from "../Contact/Contact.module.css"
 import swal from 'sweetalert';
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, useParams , Navigate  } from "react-router-dom";
 const EditUser = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+  const params = useParams("");
   const [formValues, setFormValues] = useState({
     nombre: "",
     password: "",
     perfil: "",
-    email:""
+    username:""
   });
+
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  //Function for submit form
+    const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http:///localhost:8080/admin/usuario/editar", {
-      method: "PUT",
-      body: JSON.stringify(formValues),
+    let formData = new FormData();
+    formData.append("nombre", formValues.nombre);
+    formData.append("password", formValues.password);
+    formData.append("username", formValues.username);
+    formData.append("perfil", e.target.perfil.files[0]);
+
+    fetch(`http://localhost:42267/admin/usuario/editar/${params.id}`, {
+      method: "POST",
+      body: formData,
       headers: {
-        Authorization : 'Bearer ' + localStorage.getItem('token'),
-        "Content-Type": "application/json"
-      }
+        enctype: "multipart/form-data",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
+        generarNuevoToken(formValues.username, formValues.password);
         swal("Usuario editado satisfacctoriamente");
-        navigate("/dashboard", { replace: true })
+        // navigate("/dashboard", { replace: true })
     });
   };
-
+const generarNuevoToken= (newUser, newPass)=>{
+  fetch("http://localhost:42267/api/login_check", {
+    method: "POST",
+    body: JSON.stringify({username:newUser, password: newPass}),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard", { replace: true })
+    })
+}
 
   useEffect(() => {
     //?token=${localStorage.getItem("token")}
-    fetch(`http:///localhost:8080/admin/usuario/get`, {
+    fetch(`http:///localhost:42267/admin/usuario/get`, {
         method: "GET",
         headers: {
           Authorization : 'Bearer ' + localStorage.getItem('token')
@@ -46,7 +67,8 @@ const EditUser = () => {
           setFormValues((prev) => ({
             ...prev,
             nombre: data.result.nombre,
-            email: data.result.email
+            username: data.result.email,
+            perfil: data.result.perfil
           }));
         })
         .catch((error) => console.log(error));
@@ -65,13 +87,13 @@ const EditUser = () => {
             onChange={handleInputChange}
             defaultValue={formValues.nombre}
           />
-          <label className={styles.labels} htmlFor="email">Email:</label>
+          <label className={styles.labels} htmlFor="username">Email:</label>
           <input className={styles.usuario}
-            id="email"
-            name="email"
+            id="username"
+            name="username"
             type="email"
             onChange={handleInputChange}
-            defaultValue={formValues.email}
+            defaultValue={formValues.username}
           />
            <label className={styles.labels} htmlFor="password">Contraseña:</label>
           <input className={styles.usuario}
@@ -84,7 +106,8 @@ const EditUser = () => {
           <input className={styles.usuario}
             id="perfil"
             name="perfil"
-            type="text"
+            type="file"
+            accept="image/*"
             onChange={handleInputChange}
           />
           <button className={styles.boton}type="submit">Enviar formulario</button>

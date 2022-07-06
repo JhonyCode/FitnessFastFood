@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import "../Publicaciones/Publicaciones.css";
 import { Link } from "react-router-dom";
 function Publicaciones() {
+  const [page, setPage] = useState(1);
   const [Publicaciones, setPublicaciones] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8080/admin/publicaciones", {
+    fetch(`http://localhost:42267/admin/publicaciones?page=${page}&limit=6`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -12,7 +13,7 @@ function Publicaciones() {
     })
       .then((data) => data.json())
       .then((data) => setPublicaciones(data.result));
-  }, []);
+  }, [page]);
   return (
     <div>
       <h2 className="header">Todas las publicaciones</h2>
@@ -28,6 +29,8 @@ function Publicaciones() {
           </div>
         ))}
       </section>
+      <button onClick={()=>setPage(page-1)}>prev</button>
+      <button onClick={()=>setPage(page+1)}>next</button>
     </div>
   );
 }

@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Security;
 
 
 /**
@@ -60,32 +57,31 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/new", name="app_admin_usuario_new", methods={"GET", "POST"})
      */
-    public function new(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, UsuarioRepository $usuarioRepository): Response
+    public function new(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher ): Response
     {
         // $data = $request->toArray();
       
-
-        $imagen = $request->files->get('perfil');
-        $nombreImagen = '';
-        if (!empty($imagen)) {
-            if (!empty($imagen->getClientOriginalName())) {
-                $nombreImagen = uniqid() . '_' . strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
-                $imagen->move('uploads/', $nombreImagen);
-            }
-        }
-
         $resultado = "ko";
-        if(isset($username)) {
+        $passwordRequest = $request->request->get("password");
+        $usuarioName = $request->request->get("username");
+        $usuarioNombre = $request->request->get("nombre");
+        $imagen = $request->files->get('perfil');
+        
+        if(!empty($usuarioName)){
+            $nombreImagen = '';
+            if (!empty($imagen)) {
+                if (!empty($imagen->getClientOriginalName())) {
+                    $nombreImagen = uniqid() . '_' . strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                    $imagen->move('uploads/', $nombreImagen);
+                }
+            }
             $usuario = new Usuario();
-            $passwordRequest = $request->request->get("password");
-            $usuarioName = $request->request->get("username");
+            
             $hashedPassword = $passwordHasher->hashPassword(
                 $usuario,
-                $passwordRequest['password']
-                
+                $passwordRequest
             );
-
-            $usuarioNombre = $request->request->get("nombre");
+            
             $usuario->setNombre($usuarioNombre);
             $usuario->setEmail($usuarioName);
             $usuario->setPerfil($nombreImagen);
@@ -93,37 +89,63 @@ class UsuarioController extends AbstractController
 
             $em->persist($usuario);
             $em->flush();
-
-            if (!empty($usuario->getId())) {
-                $resultado = "ok";
-            }
         }
-
         return $this->json([
             'resultado' => $resultado
         ]);
     }
     /**
-     * @Route("/editar", methods={"PUT"})
+     * @Route("/editar/{id}", methods={"POST"})
      */
-    public function token1(EntityManagerInterface $em, Request $request, UsuarioRepository $usuarioRepository): Response
+    public function token1(UserPasswordHasherInterface $passwordHasher,EntityManagerInterface $em, Request $request, UsuarioRepository $usuarioRepository, $id): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $data = $request->toArray();
         $resultado = "ko";
-        if (isset($data["nombre"])) {
-            $user->setNombre($data["nombre"]);
-            $user->setEmail($data["email"]);
-            $user->setPerfil($data["perfil"]);
+        $passwordRequest = $request->request->get("password");
+        $usuarioName = $request->request->get("username");
+        $usuarioNombre = $request->request->get("nombre");
+        $imagen = $request->files->get('perfil');
+        
+        if(!empty($usuarioName)){
+            $nombreImagen = '';
+            if (!empty($imagen)) {
+                if (!empty($imagen->getClientOriginalName())) {
+                    $nombreImagen = uniqid() . '_' . strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                    $imagen->move('uploads/', $nombreImagen);
+                }
+            }
+            $usuario= $usuarioRepository->find($id);
+            $hashedPassword = $passwordHasher->hashPassword(
+                $usuario,
+                $passwordRequest
+            );
+            
+            $usuario->setNombre($usuarioNombre);
+            $usuario->setEmail($usuarioName);
+            $usuario->setPerfil($nombreImagen);
+            $usuario->setPassword($hashedPassword);
 
-            $em->persist($user);
+            $em->persist($usuario);
             $em->flush();
         }
-
         return $this->json([
             'resultado' => $resultado
         ]);
+        // /** @var User $user */
+        // $user = $this->getUser();
+        // $data = $request->toArray();
+        // $resultado = "ko";
+        // if (isset($data["nombre"])) {
+        //     $user->setNombre($data["nombre"]);
+        //     $user->setEmail($data["email"]);
+        //     $user->setPerfil($data["perfil"]);
+
+        //     $em->persist($user);
+        //     $em->flush();
+        // }
+
+        // return $this->json([
+        //     'resultado' => $resultado
+        // ]);
     }
 
 
@@ -136,18 +158,33 @@ class UsuarioController extends AbstractController
         $user = $this->getUser();
         //$tokenStorage = $request->query->get('token');
         $resultado = [];
+        $listasPublicaciones = [];
         $publicaciones = $publicacionesRepository->findBy(['usuario' => $user->getId()]);
-        foreach ($publicaciones as $publicacion) {
-            $publicacion->getTitulo();
-            $publicacion->getImagen();
+        if(!empty($publicaciones)){
+            foreach ($publicaciones as $publicacion) {
+                $listasPublicaciones[]=[
+                    "titulo" => $publicacion->getTitulo(),
+                    "imagen" => $publicacion->getImagen(),
+                    "id" => $publicacion->getId()
+                ];
+                //$publicacion->getTitulo();
+                //$publicacion->getImagen();
+            }
         }
+
+        if(!empty($user->getPerfil()))
+        {
+            $imagenPerfil='http://localhost:42267/uploads/'.$user->getPerfil();
+        }
+        else{$imagenPerfil='';}
+
         $resultado = [
             'id' => $user->getId(),
             'nombre' => $user->getNombre(),
-            'perfil' => $user->getPerfil(),
+            'perfil' => $imagenPerfil,
             'role' => $user->getRoles(),
             'email' => $user->getEmail(),
-            'publicaciones' => 'Publicaciones:  ' . $publicacion->getTitulo()
+            'publicaciones' => $listasPublicaciones
         ];
         return $this->json([
             'result' => $resultado

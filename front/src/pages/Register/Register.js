@@ -18,22 +18,21 @@ const Register = () => {
   };
   //Petition to server.
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     let formData = new FormData();
     formData.append("nombre", formValues.nombre);
     formData.append("password", formValues.password);
     formData.append("username", formValues.username);
     formData.append("perfil", e.target.perfil.files[0]);
 
-
     console.log(formData);
 
-    e.preventDefault();
-    fetch("http://localhost:8080/admin/usuario/new", {
+    fetch("http://localhost:42267/admin/usuario/new", {
       method: "POST",
       body: formData,
       headers: {
         enctype: "multipart/form-data",
-        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())

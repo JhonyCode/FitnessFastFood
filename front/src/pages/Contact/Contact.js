@@ -15,7 +15,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http:///localhost:8080/contacto/new", {
+    fetch("http:///localhost:42267/contacto/new", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {

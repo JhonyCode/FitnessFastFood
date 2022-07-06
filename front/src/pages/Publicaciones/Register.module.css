@@ -1,0 +1,134 @@
+.reg {
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 131px;
+    flex-wrap: nowrap;
+  
+  }
+  label{
+    color: white;
+    margin-right: 15px;
+    margin-left: 25px;
+    text-shadow: black 5px 0 10px;
+  }
+
+  .user{
+    padding: 10px;
+    border-radius: 8px;
+    background: #F2994A;
+  }
+ .user::placeholder{
+  color: black;
+  font-weight: 600;
+font-size: 15px;
+background: #F2994A;
+  }
+  .password{ padding: 10px;
+    border-radius: 8px;
+    background: #F2994A;
+  }
+ .password::placeholder{
+  color: black;
+  font-weight: 600;
+  background: #F2994A;
+font-size: 15px;
+  }
+
+.boton{
+  background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 10px;
+  border-radius: 8px;
+  margin-left: 15px;
+  }
+  .boton:hover{
+    font-weight: 700;
+    background: #F2994A;
+    transition: all 0.8s ease;
+    
+  }
+
+  .labels{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 35px;
+    text-shadow: black 5px 0 10px;
+  }
+  .default {
+    margin-bottom: 251px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+        }
+  .contactform{
+  width: 50%;
+  padding: 1.5em 1em;
+          border-radius: 0.3rem;
+          font-size: 1.2rem;
+        }
+  .contactform input,
+  .contactform textarea,
+  .contactform button {
+  
+    resize: none;
+    width: 100%;
+    padding: .5rem .3rem;
+    margin: 1em 0 0;
+    border-radius: 0.3rem;
+     font-size: 1.5rem;
+  }
+  .links {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 4px;
+    background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      border: 1px solid black;
+  }
+  
+  .links a {
+    text-decoration: none;
+    color: black;
+  }
+  .links:hover
+  {
+    font-weight: 700;
+    transition: all 0.5s ease;
+    background: #F2994A;
+  }
+  
+
+  @media only screen and (max-width: 768px) {
+    .default {
+      display: flex;
+      width: 80%;
+ }
+ .contactform{
+   width: 80%;
+   padding: 1.5em 1em;
+           border-radius: 0.3rem;
+           font-size: 1.2rem;
+         }
+ .contactform input,
+ .contactform textarea,
+ .contactform button {
+ 
+  font-size: 15px;
+   resize: none;
+   width: 100%;
+   /* padding: .5rem .3rem; */
+   margin: 1em 0 0;
+   border-radius: 0.3rem;
+   font-size: 1.5rem;
+ }
+ h1{
+  font-size: 30px;
+ }
+    }

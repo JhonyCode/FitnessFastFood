@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 export function Users() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch("http:///localhost:8080/admin/usuario/admin",
+    fetch("http:///localhost:42267/admin/usuario/admin",
     {
       method: "GET",
       headers: {
@@ -28,7 +28,7 @@ export function Users() {
             <p>{user.rol}</p>
             <img src={`../images/${user.perfil}`} />
             <div>
-              <Link className={styles.links} to={`/usuarios/${user.id}`}>Ver detalle</Link>
+              <Link className={styles.links} to={`admin/usuarios/${user.id}`}>Ver detalle</Link>
             </div>
           </ul>
           </div>

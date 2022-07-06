@@ -13,6 +13,7 @@
 .seccion {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .seccion1 {
   display: flex;
@@ -24,7 +25,9 @@ img {
   height: auto;
   margin-top: 3px;
 }
-.imagenes img {
+.imagenes img { 
+
+  border-radius: 3%;
   object-fit: cover;
   object-position: center;
   aspect-ratio: 4/4;
@@ -38,7 +41,7 @@ img {
 }
 
 .titulo {
-  font-size: 35px;
+  font-size: 31px;
   text-align: center;
   padding: 10px 0px;
   line-height: 35px;

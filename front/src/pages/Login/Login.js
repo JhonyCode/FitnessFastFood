@@ -13,7 +13,7 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/login_check", {
+    fetch("http://localhost:42267/api/login_check", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {

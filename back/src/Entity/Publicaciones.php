@@ -50,11 +50,6 @@ class Publicaciones
     private $categoria;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Comentario::class, inversedBy="publicaciones")
-     */
-    private $comentario;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="publicaciones")
      */
     private $usuario;
@@ -73,6 +68,11 @@ class Publicaciones
      * @ORM\Column(type="string", length=255)
      */
     private $ingredientes;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $valor_nutricional;
 
     public function __construct()
     {
@@ -174,18 +174,7 @@ class Publicaciones
         return $this;
     }
 
-    public function getComentario(): ?Comentario
-    {
-        return $this->comentario;
-    }
-
-    public function setComentario(?Comentario $comentario): self
-    {
-        $this->comentario = $comentario;
-
-        return $this;
-    }
-
+    
     public function getUsuario(): ?Usuario
     {
         return $this->usuario;
@@ -230,6 +219,18 @@ class Publicaciones
     public function setIngredientes(string $ingredientes): self
     {
         $this->ingredientes = $ingredientes;
+
+        return $this;
+    }
+
+    public function getValorNutricional(): ?string
+    {
+        return $this->valor_nutricional;
+    }
+
+    public function setValorNutricional(?string $valor_nutricional): self
+    {
+        $this->valor_nutricional = $valor_nutricional;
 
         return $this;
     }

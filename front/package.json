@@ -21,9 +21,11 @@
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.3",
     "rsf": "^0.4.0",
     "styled-component": "^2.8.0",
     "styled-components": "^5.3.5",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

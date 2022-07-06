@@ -43,6 +43,21 @@ class UsuarioController extends AbstractController
     }
 
     /**
+     * @Route("/image", name="app_admin_usuario_new", methods={"GET", "POST"})
+     */
+    // public function image(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, UsuarioRepository $usuarioRepository): Response
+    // {
+    //     if(!empty($imagen))
+    //     {
+    //         if(!empty($imagen->getClientOriginalName()))
+    //         {
+    //             $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+    //             $imagen->move('uploads/', $nombreImagen);
+    //         }
+    //     }
+    // }
+        
+    /**
      * @Route("/new", name="app_admin_usuario_new", methods={"GET", "POST"})
      */
     public function new(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, UsuarioRepository $usuarioRepository): Response
@@ -72,22 +87,45 @@ class UsuarioController extends AbstractController
             'resultado' => $resultado
         ]);
     }
-
-     /**
-     * @Route("/get", methods={"GET"})
+   /**
+     * @Route("/editar", methods={"PUT"})
      */
-    public function token(Security $securityService, PublicacionesRepository $publicacionesRepository): Response
+    public function token1(EntityManagerInterface $em ,Request $request, UsuarioRepository $usuarioRepository): Response 
     {
         /** @var User $user */
         $user = $this->getUser();
-        $listaPublicaciones = [];
+          $data = $request->toArray();
+         $resultado="ko";
+          if(isset($data["nombre"])){
+              $user->setNombre($data["nombre"]);
+              $user->setEmail($data["email"]);
+              $user->setPerfil($data["perfil"]);
+              
+              $em->persist($user);
+              $em->flush();
+  
+         }
+  
+          return $this->json([
+              'resultado' => $resultado
+          ]);
+    }
+
+
+     /**
+     * @Route("/get", methods={"GET", "POST"})
+     */
+    public function token(EntityManagerInterface $em , Request $request, PublicacionesRepository $publicacionesRepository): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        //$tokenStorage = $request->query->get('token');
         $resultado = [];
         $publicaciones = $publicacionesRepository->findBy(['usuario' => $user->getId()]);
         foreach ($publicaciones as $publicacion) {
-            $listaPublicaciones = [
-                $publicacion->getTitulo(),
-                $publicacion->getImagen()
-            ];
+                $publicacion->getTitulo();
+                $publicacion->getImagen();
+        
         }
         $resultado = [
             'id' => $user->getId(),
@@ -95,7 +133,7 @@ class UsuarioController extends AbstractController
             'perfil' => $user->getPerfil(),
             'role' => $user->getRoles(),
             'email' => $user->getEmail(),
-            'publicaciones' => $listaPublicaciones,
+            'publicaciones' => 'Publicaciones:  ' . $publicacion->getTitulo()
         ];
         return $this->json([
             'result' => $resultado

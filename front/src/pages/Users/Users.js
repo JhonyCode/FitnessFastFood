@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./imagenusuario.module.css";
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "../../components/AuthContext";
 export function Users() {
   const [users, setUsers] = useState([]);
-  const { token } = useContext(AuthContext);
   useEffect(() => {
-    fetch("http:///localhost:8080/admin/usuario")
+    fetch("http:///localhost:8080/admin/usuario/admin",
+    {
+      method: "GET",
+      headers: {
+        Authorization : 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json"
+  }})
       .then((res) => res.json())
       .then((data) => setUsers(data.result));
+      
   }, []);
-  if (!token) return <Navigate to="/login" replace />;
   return (
     <div className={styles.userlist}>
       {users.map((user) => {

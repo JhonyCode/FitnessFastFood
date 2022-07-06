@@ -69,7 +69,7 @@ const Navbar = () => {
               <Link onClick={() => showSwitch()} to="/contacto">
                 Contacto
               </Link>
-              <Link to="/dashboard">Panel de control</Link>
+              <Link onClick={() => showSwitch()} to="/dashboard">Panel de control</Link>
               {/* <Link  to={`/usuarios/${user.id}`}>dashboard</Link> */}
               <Link onClick={() => logout()} to="/login">
                 Salir

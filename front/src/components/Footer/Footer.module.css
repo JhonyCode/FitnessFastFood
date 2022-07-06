@@ -8,7 +8,4 @@ padding: 1em;
   height: 5vh;
   color: white;
   text-shadow: black 2px 2px 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
 }

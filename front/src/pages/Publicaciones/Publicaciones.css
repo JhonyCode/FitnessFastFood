@@ -1,6 +1,6 @@
 .publicaciones {
-  width: 23%;
-  margin: 10px 1%;
+  width: 40%;
+  margin: 10px 5%;
   text-align: center;
   color: white;
   font-weight: 700;
@@ -84,6 +84,8 @@ img {
 @media only screen and (max-width: 768px) {
   .publicaciones {
     font-size: 13px;
+    width: 80%;
+    margin: 10px 10%;
   }
   .imagen img {
     object-fit: cover;
@@ -94,7 +96,7 @@ img {
   }
   .publicacion{
     font-size: 18px;
-    width: 70%;
+    margin: 10px 10%;
   }
   .ingredientes{
     width: 100%;
@@ -104,10 +106,14 @@ img {
     justify-content: center;
     display: flex;
   }
+  h2{
+    text-align: center;
+   font-size: 26px;
+  }
 }
 @media only screen and (max-width: 568px){
   .publicacion{
-    width: 70%;
+    width: 90%;
   }
 }
 

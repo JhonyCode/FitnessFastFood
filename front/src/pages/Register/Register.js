@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext";
 import styles from "./Register.module.css"
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 //Register function, gets token and formValues and check it
 //after, then you will be redirected to Home if all ok.
 const Register = () => {
@@ -11,7 +12,7 @@ const Register = () => {
   }
   const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState({ username: "", password: "", nombre: "" });
+  const [formValues, setFormValues] = useState({ username: "", password: "", nombre: "",  });
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -28,12 +29,10 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         setToken(data.token);
-        navigate("/login", { replace: true });
+        navigate("/login", { replace: true })
+        swal("Usuario registrado, ya puedes logear");
       });
   };
-//When you click Register, it doesn't do anything but
-// If you go to DB you will se there's the new user, 
-// didnt have time for more, sorry.
   return (
     <>
 

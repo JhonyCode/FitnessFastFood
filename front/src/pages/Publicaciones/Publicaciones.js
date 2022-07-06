@@ -15,7 +15,7 @@ function Publicaciones() {
   }, []);
   return (
     <div>
-      <h2>Todas las publicaciones</h2>
+      <h2 className="header">Todas las publicaciones</h2>
       <section className="seccion">
         {Publicaciones.map((publicacion) => (
           <div className="publicaciones" key={publicacion.id}>

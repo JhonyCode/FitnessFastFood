@@ -14,6 +14,7 @@ import Register from "./pages/Register/Register";
 import Categorias from "./pages/Categorias/Categorias";
 import { Publicacion } from "./pages/Publicaciones/Publicacion";
 import { Enviado } from "./pages/Enviado/Enviado";
+import EditUser from "./pages/Users/EditUser";
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +32,7 @@ function App() {
         <Route path="/enviado" element={<Enviado />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/categorias" element={<Categorias />} />
+        <Route path="/edituser" element={<EditUser />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
         <Route path="/publicaciones" element={<Publicaciones />} />

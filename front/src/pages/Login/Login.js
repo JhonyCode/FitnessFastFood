@@ -1,19 +1,19 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { AuthContext } from "../../components/AuthContext";
 import { Link } from "react-router-dom";
 import styles from "../Login/Login.module.css"
+import swal from 'sweetalert';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({ username: "", password: "" });
+
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/login_check", {
+    fetch("http://localhost:42617/api/login_check", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {
@@ -22,14 +22,19 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setToken(data.token);
-        navigate("/", { replace: true });
-      });
-
+        if(data.code===401){
+          swal("Usuario y/o contraseña incorrectos");
+        }
+        else{
+          localStorage.setItem("token", data.token);
+          navigate("/dashboard", { replace: true })
+        }
+      }).catch((error)=>{
+          console.log(error);
+          swal("Usuario y/o contraseña incorrectos");
+      })
   };
-
-  // if (!token) return <Navigate to="/register"replace />;
-
+ 
   return (
     <>
       <h1>Formulario de Login</h1>

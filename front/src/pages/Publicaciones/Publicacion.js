@@ -25,10 +25,10 @@ export function Publicacion() {
     
            {Publicaciones ? (
           <div className="publicacion">
+          <div className="titulo">{Publicaciones.titulo}</div><br></br>
           <div className="imagen">
               <img src={`../images/${Publicaciones.imagen}`} />
           </div>
-          <div className="titulo">{Publicaciones.titulo}</div><br></br>
           <div className="ingredientes">{Publicaciones.ingredientes}</div><br></br>
           <div className="resumenes">{Publicaciones.resumen}</div><br></br>
           <div className="ingredientes">{Publicaciones.comentario}</div><br></br>

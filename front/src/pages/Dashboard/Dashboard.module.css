@@ -1,10 +1,26 @@
 .box{
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 .imgas{
   width: 150px;
   height: 150px;
+}
+.nombre{
+  font-size: 35px;
+}
+.boton{
+  font-weight: 600;
+  margin-top: 20px;
   margin-bottom: 370px;
+  padding: 20px;
+  border-radius: 5%;
+  background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+.boton:hover {
+  font-weight: 700;
+    background: #F2994A;
+    transition: all 0.8s ease;
 }

@@ -5,7 +5,6 @@ import swal from 'sweetalert';
 import { useNavigate, Navigate } from "react-router-dom";
 const EditUser = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
     nombre: "",
     password: "",

@@ -19,12 +19,12 @@ function Publicaciones() {
       <section className="seccion">
         {Publicaciones.map((publicacion) => (
           <div className="publicaciones" key={publicacion.id}>
+            <div className="titulo">{publicacion.titulo}</div>
             <div className="imagenes">
               <Link to={`/publicaciones/${publicacion.id}`}>
                 <img src={`./images/${publicacion.imagen}`} />
               </Link>
             </div>
-            <div className="titulo">{publicacion.titulo}</div>
           </div>
         ))}
       </section>

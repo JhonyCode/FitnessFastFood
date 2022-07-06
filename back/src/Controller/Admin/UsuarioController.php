@@ -56,23 +56,39 @@ class UsuarioController extends AbstractController
     //         }
     //     }
     // }
-        
+
     /**
      * @Route("/new", name="app_admin_usuario_new", methods={"GET", "POST"})
      */
     public function new(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, UsuarioRepository $usuarioRepository): Response
     {
-        $data = $request->toArray();
+        // $data = $request->toArray();
+      
+
+        $imagen = $request->files->get('perfil');
+        $nombreImagen = '';
+        if (!empty($imagen)) {
+            if (!empty($imagen->getClientOriginalName())) {
+                $nombreImagen = uniqid() . '_' . strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                $imagen->move('uploads/', $nombreImagen);
+            }
+        }
 
         $resultado = "ko";
-        if (isset($data["username"])) {
+        if(isset($username)) {
             $usuario = new Usuario();
-            $usuario->setEmail($data["username"]);
-            $usuario->setNombre($data["nombre"]);
+            $passwordRequest = $request->request->get("password");
+            $usuarioName = $request->request->get("username");
             $hashedPassword = $passwordHasher->hashPassword(
                 $usuario,
-                $data['password']
+                $passwordRequest['password']
+                
             );
+
+            $usuarioNombre = $request->request->get("nombre");
+            $usuario->setNombre($usuarioNombre);
+            $usuario->setEmail($usuarioName);
+            $usuario->setPerfil($nombreImagen);
             $usuario->setPassword($hashedPassword);
 
             $em->persist($usuario);
@@ -87,35 +103,34 @@ class UsuarioController extends AbstractController
             'resultado' => $resultado
         ]);
     }
-   /**
+    /**
      * @Route("/editar", methods={"PUT"})
      */
-    public function token1(EntityManagerInterface $em ,Request $request, UsuarioRepository $usuarioRepository): Response 
+    public function token1(EntityManagerInterface $em, Request $request, UsuarioRepository $usuarioRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-          $data = $request->toArray();
-         $resultado="ko";
-          if(isset($data["nombre"])){
-              $user->setNombre($data["nombre"]);
-              $user->setEmail($data["email"]);
-              $user->setPerfil($data["perfil"]);
-              
-              $em->persist($user);
-              $em->flush();
-  
-         }
-  
-          return $this->json([
-              'resultado' => $resultado
-          ]);
+        $data = $request->toArray();
+        $resultado = "ko";
+        if (isset($data["nombre"])) {
+            $user->setNombre($data["nombre"]);
+            $user->setEmail($data["email"]);
+            $user->setPerfil($data["perfil"]);
+
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $this->json([
+            'resultado' => $resultado
+        ]);
     }
 
 
-     /**
+    /**
      * @Route("/get", methods={"GET", "POST"})
      */
-    public function token(EntityManagerInterface $em , Request $request, PublicacionesRepository $publicacionesRepository): Response
+    public function token(EntityManagerInterface $em, Request $request, PublicacionesRepository $publicacionesRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -123,9 +138,8 @@ class UsuarioController extends AbstractController
         $resultado = [];
         $publicaciones = $publicacionesRepository->findBy(['usuario' => $user->getId()]);
         foreach ($publicaciones as $publicacion) {
-                $publicacion->getTitulo();
-                $publicacion->getImagen();
-        
+            $publicacion->getTitulo();
+            $publicacion->getImagen();
         }
         $resultado = [
             'id' => $user->getId(),
@@ -229,5 +243,4 @@ class UsuarioController extends AbstractController
 
         return $this->redirectToRoute('app_admin_usuario_index', [], Response::HTTP_SEE_OTHER);
     }
-   
 }

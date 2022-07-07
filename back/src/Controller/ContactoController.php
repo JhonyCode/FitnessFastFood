@@ -38,6 +38,7 @@ class ContactoController extends AbstractController
             $contacto = new Contacto();
             $contacto->setNombre($data["nombre"]);
             $contacto->setMensaje($data["mensaje"]);
+            $contacto->setEmail($data["email"]);
             
             $em->persist($contacto);
             $em->flush();

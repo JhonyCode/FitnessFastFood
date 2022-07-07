@@ -18,32 +18,20 @@ class AppFixtures extends Fixture
         $usuario->setEmail('user@user.com');
         $usuario->setPassword('$2y$13$q72Y0UknX8yvIzbV9CE8lO3PoajiHVQM7r8LbLkXp5ewQKImMk3zK');
         $usuario->setNombre('usuario');
-        $usuario->setPerfil('administrador');
+        $usuario->setPerfil('perfil');
         $manager->persist($usuario);
 
-        for ($i = 0; $i < 5; $i++) {
-            $categoria = new Categoria();
-            $categoria->setNombre('Categoria Número ' . $i);
-            $categoria->setDescripcion('Descripción Número ' . $i);
-            $manager->persist($categoria);
 
-            for ($j = 0; $j < 2; $j++) {
-                $comentario = new Comentario();
-                $comentario->setTexto('Texto de prueba' . $j);
-                $comentario->setFecha(new \DateTime());
-                $manager->persist($comentario);
 
-                for ($k = 0; $k < 1; $k++) {
+                for ($k = 0; $k < 6; $k++) {
                     $publicaciones = new Publicaciones();
-                    $publicaciones->setCategoria($categoria);
-                    $publicaciones->setComentario($comentario);
-                    $publicaciones->setEstado(1 || 2);
+                    $publicaciones->setEstado(1);
+                    $publicaciones->setImagen(1);
                     $publicaciones->setResumen('Resumen Número' . $k);
                     $publicaciones->setTitulo('Título Número' . $k);
                     $publicaciones->setSlug('publicacion' . uniqid());
-                    $publicaciones->setCategoria($categoria);
                     $publicaciones->setUsuario($usuario);
-                    $publicaciones->setImagen('Imagen.jpg');
+                    $publicaciones->setValorNutricional('Valor' . $k);
                     $publicaciones->setIngredientes('Ingrediente' . $k);
                     $manager->persist($publicaciones);
 
@@ -54,8 +42,8 @@ class AppFixtures extends Fixture
                         $manager->persist($valoraciones);
                     }
                 }
-            }
-        }
+            
+        
 
         $manager->flush();
     }

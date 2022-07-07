@@ -23,11 +23,10 @@ const navigate = useNavigate();
   return (
     <>
       {user ? ( <div>
-          <h1>Welcome {user.nombre} to your dashboard</h1>
+          <h1 className={styles.welcome}>Welcome {user.nombre} to your dashboard</h1>
         <section className={styles.box}>
         <div className={styles.box}>
           <div className={styles.user}  key={user.id}>
-              <div className={styles.nombre}>{user.nombre}</div>
               <div className={styles.imgas}><img  src={user.perfil} /></div>
               <button className={styles.boton} onClick={()=>{
                 navigate(`/edituser/${user.id}`, { replace: true })

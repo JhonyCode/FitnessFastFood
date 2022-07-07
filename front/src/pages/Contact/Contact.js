@@ -9,6 +9,7 @@ const Contact = () => {
   const [formValues, setFormValues] = useState({
     nombre: "",
     mensaje: "",
+    email: "",
   });
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -34,15 +35,25 @@ const Contact = () => {
       <h1>Contact form</h1>
       <div className={styles.default}>
         <form className={styles.contactform} onSubmit={handleSubmit}>
-                  <label className={styles.labels} htmlFor="nombre">Name:</label>
+        <label className={styles.labels} htmlFor="nombre">Name:</label>
           <input className={styles.usuario}
           required={true}
             id="nombre"
             name="nombre"
             type="text"
             onChange={handleInputChange}
-            value={formValues.username}
+            value={formValues.nombre}
             placeholder="Please enter a name"
+          />
+          <label className={styles.labels} htmlFor="email">Email:</label>
+          <input className={styles.usuario}
+          required={true}
+            id="email"
+            name="email"
+            type="email"
+            onChange={handleInputChange}
+            value={formValues.email}
+            placeholder="Please enter your email"
           />
           <label className={styles.labels} htmlFor="mensaje">Message:</label>
           <textarea className={styles.usuario}

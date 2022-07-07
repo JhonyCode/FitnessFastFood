@@ -1,14 +1,26 @@
 .publicaciones {
-  width: 35%;
+  width: 30%;
   margin: 10px 5%;
   text-align: center;
-  color: white;
+  color: black;
+  font-style: italic;
   font-weight: 700;
   font-size: 25px;
-  text-shadow: black 5px 0 10px;
 }
-.ingredientes {
-  text-shadow: black 5px 0 10px;
+.button1{
+  border: 2px solid black;
+  width: 100px;
+  height: 50px;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 6%;
+  background: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+.button1:hover {
+  background: #c8a0b5;
+  transition: all 0.8s ease;
 }
 .seccion {
   display: flex;
@@ -41,17 +53,13 @@ img {
 }
 
 .titulo {
+  color: black;
+font-style: italic;
+  font-weight: 700;
   font-size: 31px;
   text-align: center;
   padding: 10px 0px;
   line-height: 35px;
-}
-
-.resumenes {
-  text-shadow: black 5px 0 10px;
-}
-.valoraciones {
-  text-shadow: black 5px 0 10px;
 }
 
 @media only screen and (max-width: 981px) {
@@ -79,10 +87,11 @@ img {
   width: 25%;
   margin: 10px 1%;
   text-align: center;
-  color: white;
+  color: black;
+  font-style: italic;
   font-weight: 700;
   font-size: 25px;
-  text-shadow: black 5px 0 10px;
+
 }
 @media only screen and (max-width: 768px) {
   .publicaciones {
@@ -119,14 +128,43 @@ img {
     width: 90%;
   }
 }
+.paginado{
+  display: flex;
+  justify-content: center;
+  /* justify-content: space-around; */
+}
+.paginado button{
+  margin-left: 18%;
+  margin-right: 18%;
+  padding: 10px;
+  border: 0;
+  border-radius: 7%;
+  background-color:white;
+  font-size: 20px;
+  font-style: italic;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: all .3s linear;
 
+}
+.paginado button:hover{
+  background-color: #c8a0b5;
+}
+.titulo1{
+  font-size: 2em;
+}
 .linkpu{
   text-decoration: none;
-  color: white;
-  text-shadow: black 5px 0 10px;
-  font-size: 55px;
+  color: black;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 35px;
   justify-content: center;
   display: flex;
   margin-bottom: 25px;
   margin-top: 10px;
+}
+.linkpu:hover{
+  color: #c8a0b5;
 }

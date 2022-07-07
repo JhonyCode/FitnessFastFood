@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [Publicaciones, setPublicaciones] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:42267/admin/publicaciones?page=1&limit=4", {
+    fetch("http://localhost:8080/admin/publicaciones?page=1&limit=4", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -15,14 +15,14 @@ function Home() {
   }, []);
   return (
     <div>
-      <h1>¡Bienvenid@!</h1>
-      <h2>Últimas publicaciones</h2>
+      <h1>Welcome!</h1>
+      <h4>Latest posts</h4>
       <section className="seccion">
         {Publicaciones.map((publicacion) => (
           <div className="publicaciones" key={publicacion.id}>
             <div className="imagenes">
-              <Link to={`/publicaciones/${publicacion.id}`}>
-                <img src={`./images/${publicacion.imagen}`} />
+              <Link to={`/posts/${publicacion.id}`}>
+                <img src={publicacion.imagen} />
               </Link>
             </div>
             <div className="titulo">{publicacion.titulo}</div>

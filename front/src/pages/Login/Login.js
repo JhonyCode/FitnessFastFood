@@ -13,7 +13,7 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:42267/api/login_check", {
+    fetch("http://localhost:8080/api/login_check", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {
@@ -28,16 +28,17 @@ const Login = () => {
         else{
           localStorage.setItem("token", data.token);
           navigate("/dashboard", { replace: true })
+          {
+            window.location.reload();}
         }
       }).catch((error)=>{
-          console.log(error);
           swal("Usuario y/o contraseña incorrectos");
       })
   };
  
   return (
     <>
-      <h1>Formulario de Login</h1>
+      <h1>Login form</h1>
       <div className={styles.login}>
         <form  className={styles.contactform} onSubmit={handleSubmit}>
           <label className={styles.labels} htmlFor="username">Email</label>
@@ -48,9 +49,9 @@ const Login = () => {
             type="email"
             onChange={handleInputChange}
             value={formValues.username}
-            placeholder="Introduce tu email"
+            placeholder="Enter your email"
           />
-          <label className={styles.labels} htmlFor="password">Contraseña</label>
+          <label className={styles.labels} htmlFor="password">Password</label>
           <input className={styles.password}
            required={true}
             id="password"
@@ -58,10 +59,10 @@ const Login = () => {
             type="password"
             onChange={handleInputChange}
             values={formValues.password}
-            placeholder="Introduce tu contraseña"
+            placeholder="Enter your password"
           />
-          <button className={styles.boton} type="submit">Iniciar sesión</button>
-          <div className={styles.links}><Link to="/register">Crea una cuenta</Link></div>
+          <button className={styles.boton} type="submit">Sig in</button>
+          <div className={styles.links}><Link to="/register">Sign up</Link></div>
         </form>
       </div>
     </>

@@ -25,7 +25,7 @@ const EditUser = () => {
     formData.append("username", formValues.username);
     formData.append("perfil", e.target.perfil.files[0]);
 
-    fetch(`http://localhost:42267/admin/usuario/editar/${params.id}`, {
+    fetch(`http://localhost:8080/admin/usuario/editar/${params.id}`, {
       method: "POST",
       body: formData,
       headers: {
@@ -35,12 +35,16 @@ const EditUser = () => {
       .then((res) => res.json())
       .then((data) => {
         generarNuevoToken(formValues.username, formValues.password);
-        swal("Usuario editado satisfacctoriamente");
+        swal("User info edited correctly");
         // navigate("/dashboard", { replace: true })
+        if(data.code===500){
+          swal("Image size too high")
+        }
     });
+
   };
 const generarNuevoToken= (newUser, newPass)=>{
-  fetch("http://localhost:42267/api/login_check", {
+  fetch("http://localhost:8080/api/login_check", {
     method: "POST",
     body: JSON.stringify({username:newUser, password: newPass}),
     headers: {
@@ -56,7 +60,7 @@ const generarNuevoToken= (newUser, newPass)=>{
 
   useEffect(() => {
     //?token=${localStorage.getItem("token")}
-    fetch(`http:///localhost:42267/admin/usuario/get`, {
+    fetch(`http:///localhost:8080/admin/usuario/get`, {
         method: "GET",
         headers: {
           Authorization : 'Bearer ' + localStorage.getItem('token')
@@ -68,7 +72,7 @@ const generarNuevoToken= (newUser, newPass)=>{
             ...prev,
             nombre: data.result.nombre,
             username: data.result.email,
-            perfil: data.result.perfil
+            perfil: data.result.perfil,
           }));
         })
         .catch((error) => console.log(error));
@@ -76,10 +80,10 @@ const generarNuevoToken= (newUser, newPass)=>{
 
   return (
     <>
-      <h1>Editar información del perfil</h1>
+      <h1>Edit user info</h1>
       <div className={styles.default}>
         <form className={styles.contactform} onSubmit={handleSubmit}>
-                  <label className={styles.labels} htmlFor="nombre">Nombre:</label>
+                  <label className={styles.labels} htmlFor="nombre">First name:</label>
           <input className={styles.usuario}
          id="nombre"
             name="nombre"
@@ -95,14 +99,14 @@ const generarNuevoToken= (newUser, newPass)=>{
             onChange={handleInputChange}
             defaultValue={formValues.username}
           />
-           <label className={styles.labels} htmlFor="password">Contraseña:</label>
+           <label className={styles.labels} htmlFor="password">Password:</label>
           <input className={styles.usuario}
             id="password"
             name="password"
             type="password"
             onChange={handleInputChange}
           />
-          <label className={styles.labels} htmlFor="perfil">Imagen:</label>
+          <label className={styles.labels} htmlFor="perfil">Profile photo:</label>
           <input className={styles.usuario}
             id="perfil"
             name="perfil"
@@ -110,7 +114,10 @@ const generarNuevoToken= (newUser, newPass)=>{
             accept="image/*"
             onChange={handleInputChange}
           />
-          <button className={styles.boton}type="submit">Enviar formulario</button>
+          <button className={styles.boton}type="submit">Send changes</button>
+          <button className={styles.boton} onClick={()=>{
+                navigate("/dashboard", { replace: true })
+              }} > Go back</button>
         </form>
       </div>
     </>

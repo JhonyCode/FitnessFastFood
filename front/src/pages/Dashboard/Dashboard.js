@@ -7,14 +7,13 @@ export function Dashboard() {
   const [user, setUser] = useState();
 const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:42267/admin/usuario/get", {
+    fetch("http://localhost:8080/admin/usuario/get", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
       .then((data) => {
-          console.log(data.result);
           setUser(data.result);
         }
       );
@@ -24,31 +23,18 @@ const navigate = useNavigate();
   return (
     <>
       {user ? ( <div>
-          <h1>Bienvenido a tu panel de control</h1>
+          <h1>Welcome {user.nombre} to your dashboard</h1>
         <section className={styles.box}>
         <div className={styles.box}>
           <div className={styles.user}  key={user.id}>
               <div className={styles.nombre}>{user.nombre}</div>
               <div className={styles.imgas}><img  src={user.perfil} /></div>
-              <div><button className={styles.boton} onClick={()=>{
+              <button className={styles.boton} onClick={()=>{
                 navigate(`/edituser/${user.id}`, { replace: true })
-              }} > CAMBIAR INFO</button></div>
-              
-
-              {user.publicaciones.map((publicacion) => (
-          <div className="publicaciones" key={publicacion.id}>
-            <div className="titulo">{publicacion.titulo}</div>
-            <div className="imagenes">
-              <Link to={`/publicaciones/${publicacion.id}`}>
-                <img src={`./images/${publicacion.imagen}`} />
-              </Link>
-            </div>
-          </div>
-        ))}
-                    <Link to="/nuevapublicacion">
-                CREAR PUBLICACION
-              </Link>
-          </div>
+              }} > Change info</button></div>
+            <button className={styles.boton1} onClick={()=>{
+                navigate("/userposts", { replace: true })
+              }} > My posts</button>
         </div>
         </section>
         </div>

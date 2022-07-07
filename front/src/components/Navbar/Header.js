@@ -23,23 +23,23 @@ const Navbar = () => {
     <div>
       {!token ? (
         <>
-          <div className="navbar">
+                  <div className="navbar">
             <div className="logo">Fitness Fast Food</div>
             <div className={show ? "links active" : "links"}>
               <Link onClick={() => showSwitch()} to="/">
-                Inicio
+                Home
               </Link>
               <Link onClick={() => showSwitch()} to="/about">
-                Sobre nosotros
+                About us
               </Link>
-              <Link onClick={() => showSwitch()} to="/publicaciones">
-                Publicaciones
+              <Link onClick={() => showSwitch()} to="/posts">
+                Recipes
               </Link>
-              <Link onClick={() => showSwitch()} to="/contacto">
-                Contacto
+              <Link onClick={() => showSwitch()} to="/contact">
+                Contact
               </Link>
               <Link onClick={() => showSwitch()} to="/login">
-                Login/Registro
+                Login/Register
               </Link>
             </div>
             <div
@@ -58,21 +58,24 @@ const Navbar = () => {
             <div className="logo">Fitness Fast Food</div>
             <div className={show ? "links active" : "links"}>
               <Link onClick={() => showSwitch()} to="/">
-                Inicio
+                Home
               </Link>
-              <Link onClick={() => showSwitch()} to="/publicaciones">
-                Publicaciones
+              <Link onClick={() => showSwitch()} to="/posts">
+                Recipes
               </Link>
               <Link onClick={() => showSwitch()} to="/about">
-                Sobre nosotros
+               About us
               </Link>
-              <Link onClick={() => showSwitch()} to="/contacto">
-                Contacto
+              <Link onClick={() => showSwitch()} to="/contact">
+                Contact
               </Link>
-              <Link onClick={() => showSwitch()} to="/dashboard">Panel de control</Link>
-              {/* <Link  to={`/usuarios/${user.id}`}>dashboard</Link> */}
+              <Link onClick={() => showSwitch()} to="/newpost">
+                Create post
+              </Link>
+              <Link onClick={() => showSwitch()} to="/dashboard">My dashboard</Link>
+
               <Link onClick={() => logout()} to="/login">
-                Salir
+                Exit
               </Link>
             </div>
             <div
@@ -82,6 +85,7 @@ const Navbar = () => {
               <span></span>
               <span></span>
               <span></span>
+              
             </div>
           </div>
         </>

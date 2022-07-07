@@ -1,9 +1,8 @@
 .labels{
   display: flex;
   justify-content: center;
-  color: white;
+  color:black;
   font-size: 35px;
-  text-shadow: black 5px 0 10px;
 }
 .default {
   margin-bottom: 251px;
@@ -14,14 +13,23 @@
   flex-direction: column;
       }
 .contactform{
-  width: 50%;
+  width: 30%;
 padding: 1.5em 1em;
         border-radius: 0.3rem;
         font-size: 1.2rem;
       }
+
+.contactform textarea {
+
+  resize: none;
+  width: 100%;
+  padding: 2.5rem .3rem;
+  margin: 0 0 0.8em;
+  border-radius: 0.3rem;
+  font-size: 1.5rem;
+}
 .contactform input,
-.contactform textarea,
-.contactform button {
+.contactform button{
 
   resize: none;
   width: 100%;
@@ -30,48 +38,27 @@ padding: 1.5em 1em;
   border-radius: 0.3rem;
   font-size: 1.5rem;
 }
-  .email{ padding: 10px;
-    border-radius: 8px;
-    background: #F2994A;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-    
-  }
- .email::placeholder{
-  background: #F2994A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-color:white;
-  font-weight: 600;
-font-size: 15px;
-  }
+ 
   .usuario{ padding: 10px;
     border-radius: 8px;
-    background: #F2994A;
+    background: #c8a0b5;
     
   }
  .usuario::placeholder{
-  background: #F2994A;
+  background: #c8a0b5;
 color:black;
   font-weight: 600;
 font-size: 15px;
   }
 
   .boton{
-    background: #F2994A;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
     padding: 10px;
     border-radius: 8px;
     margin-left: 15px;
     }
     .boton:hover{
       transition: all 0.8s ease;
-      font-weight: 700;
-      background: #F2994A;  /* fallback for old browsers */
+      background:#c8a0b5;
         
     }
     
@@ -102,4 +89,5 @@ font-size: 15px;
     font-size: 30px;
    }
       }
+
 

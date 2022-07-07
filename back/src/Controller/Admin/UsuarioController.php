@@ -103,6 +103,7 @@ class UsuarioController extends AbstractController
         $passwordRequest = $request->request->get("password");
         $usuarioName = $request->request->get("username");
         $usuarioNombre = $request->request->get("nombre");
+        $usuarioNombre = $request->request->get("nombre");
         $imagen = $request->files->get('perfil');
         
         if(!empty($usuarioName)){
@@ -162,9 +163,9 @@ class UsuarioController extends AbstractController
         $publicaciones = $publicacionesRepository->findBy(['usuario' => $user->getId()]);
         if(!empty($publicaciones)){
             foreach ($publicaciones as $publicacion) {
-                $listasPublicaciones[]=[
+                                $listasPublicaciones[]=[
                     "titulo" => $publicacion->getTitulo(),
-                    "imagen" => $publicacion->getImagen(),
+                    "imagen" =>'http://localhost:8080/uploads/' .$publicacion->getImagen(),
                     "id" => $publicacion->getId()
                 ];
                 //$publicacion->getTitulo();
@@ -174,13 +175,13 @@ class UsuarioController extends AbstractController
 
         if(!empty($user->getPerfil()))
         {
-            $imagenPerfil='http://localhost:42267/uploads/'.$user->getPerfil();
+            $imagenPerfil='http://localhost:8080/uploads/'.$user->getPerfil();
         }
         else{$imagenPerfil='';}
 
         $resultado = [
             'id' => $user->getId(),
-            'nombre' => $user->getNombre(),
+             'nombre' => $user->getNombre(),
             'perfil' => $imagenPerfil,
             'role' => $user->getRoles(),
             'email' => $user->getEmail(),

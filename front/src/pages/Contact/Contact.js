@@ -4,6 +4,7 @@ import { AuthContext } from "../../components/AuthContext";
 import styles from "../Contact/Contact.module.css"
 import swal from "sweetalert";
 const Contact = () => {
+  const navigate = useNavigate();
   const { token, setToken } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
     nombre: "",
@@ -15,7 +16,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http:///localhost:42267/contacto/new", {
+    fetch("http:///localhost:8080/contacto/new", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {
@@ -24,15 +25,16 @@ const Contact = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-                swal("Mensaje enviado, le contestaremos en la mayor brevedad prosible");
+                swal("Message sended!");
+                navigate("/", { replace: true });
               });
   };
   return (
     <>
-      <h1>Formulario de contacto</h1>
+      <h1>Contact form</h1>
       <div className={styles.default}>
         <form className={styles.contactform} onSubmit={handleSubmit}>
-                  <label className={styles.labels} htmlFor="nombre">Nombre:</label>
+                  <label className={styles.labels} htmlFor="nombre">Name:</label>
           <input className={styles.usuario}
           required={true}
             id="nombre"
@@ -40,18 +42,18 @@ const Contact = () => {
             type="text"
             onChange={handleInputChange}
             value={formValues.username}
-            placeholder="Por favor, escribe tu nombre"
+            placeholder="Please enter a name"
           />
-          <label className={styles.labels} htmlFor="mensaje">Mensaje:</label>
+          <label className={styles.labels} htmlFor="mensaje">Message:</label>
           <textarea className={styles.usuario}
            required={true}
             id="mensaje"
             name="mensaje"
             type="text"
             onChange={handleInputChange}
-            placeholder="Por favor, deja aquí tu mensaje..."
+            placeholder="Please write something"
           ></textarea>
-          <button className={styles.boton}type="submit">Enviar formulario</button>
+          <button className={styles.boton}type="submit">Send form</button>
         </form>
       </div>
     </>

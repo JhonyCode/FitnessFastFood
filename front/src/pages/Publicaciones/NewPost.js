@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 import styles from "./Register.module.css"
-import { Link } from "react-router-dom";
-
-export function NewPublicacion(){
-
+import { useNavigate, Navigate } from "react-router-dom";
+export function NewPost(){
+  const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         titulo: "",
         resumen: "",
         imagen: "",
         ingredientes:"",
+        comentario:""
       });
     const handleInputChange = (e) => {
         setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -21,11 +21,12 @@ export function NewPublicacion(){
         formData.append("titulo", formValues.titulo);
         formData.append("resumen", formValues.resumen);
         formData.append("ingredientes", formValues.ingredientes);
+        formData.append("comentario", formValues.comentario);
         formData.append("imagen", e.target.imagen.files[0]);
     
-        console.log(formData);
+  
     
-        fetch("http://localhost:42267/admin/publicaciones/new", {
+        fetch("http://localhost:8080/admin/publicaciones/new", {
           method: "POST",
           body: formData,
           headers: {
@@ -36,6 +37,7 @@ export function NewPublicacion(){
           .then((res) => res.json())
           .then((data) => {
             swal("Publicacion añadida correctamente");
+            navigate("/userposts", { replace: true })
           });
     
       };
@@ -43,7 +45,7 @@ export function NewPublicacion(){
 <div className={styles.reg}>
         <form className={styles.contactform} onSubmit={handleSubmit}>
           <label className={styles.labels} htmlFor="titulo">
-            Titulo de la publicación
+            Tittle
           </label>
           <input
             className={styles.user}
@@ -55,7 +57,7 @@ export function NewPublicacion(){
             value={formValues.titulo}
           />
           <label className={styles.labels} htmlFor="ingredientes">
-            Ingredientes
+            Ingredients
           </label>
           <textarea
             className={styles.password}
@@ -67,7 +69,7 @@ export function NewPublicacion(){
             values={formValues.ingredientes}
           />
           <label className={styles.labels} htmlFor="resumen">
-           Elaboración
+           Elaboration
           </label>
           <textarea
             className={styles.password}
@@ -78,8 +80,20 @@ export function NewPublicacion(){
             onChange={handleInputChange}
             values={formValues.resumen}
           />
+                    <label className={styles.labels} htmlFor="comentario">
+                    Nutritional value
+          </label>
+          <textarea
+            className={styles.password}
+            required={true}
+            id="comentario"
+            name="comentario"
+            type="text"
+            onChange={handleInputChange}
+            values={formValues.comentario}
+          />
         <label className={styles.labels} htmlFor="imagen">
-            Imagen de la publicación
+            Recipe image
           </label>
           <input
             className={styles.password}
@@ -91,7 +105,7 @@ export function NewPublicacion(){
           />
           
           <button className={styles.boton} type="submit">
-            Crear publicación
+            Create
           </button>
         </form>
       </div>

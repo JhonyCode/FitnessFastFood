@@ -26,9 +26,8 @@ const Register = () => {
     formData.append("username", formValues.username);
     formData.append("perfil", e.target.perfil.files[0]);
 
-    console.log(formData);
 
-    fetch("http://localhost:42267/admin/usuario/new", {
+    fetch("http://localhost:8080/admin/usuario/new", {
       method: "POST",
       body: formData,
       headers: {
@@ -44,7 +43,7 @@ const Register = () => {
   };
   return (
     <>
-      <h1>Regístrese aquí</h1>
+      <h1>Sign up here</h1>
       <div className={styles.reg}>
         <form className={styles.contactform} onSubmit={handleSubmit}>
           <label className={styles.labels} htmlFor="username">
@@ -52,7 +51,7 @@ const Register = () => {
           </label>
           <input
             className={styles.user}
-            placeholder="Escriba aquí su email"
+            placeholder="Enter your email"
             required={true}
             id="username"
             name="username"
@@ -61,11 +60,11 @@ const Register = () => {
             value={formValues.username}
           />
           <label className={styles.labels} htmlFor="nombre">
-            Nombre
+            First name
           </label>
           <input
             className={styles.password}
-            placeholder="Escriba aquí su nombre"
+            placeholder="Enter your name"
             required={true}
             id="nombre"
             name="nombre"
@@ -74,11 +73,11 @@ const Register = () => {
             values={formValues.nombre}
           />
           <label className={styles.labels} htmlFor="password">
-            Contraseña
+            Password
           </label>
           <input
             className={styles.password}
-            placeholder="Escriba aquí su contraseña"
+            placeholder="Enter your password"
             required={true}
             id="password"
             name="password"
@@ -87,10 +86,10 @@ const Register = () => {
             values={formValues.password}
           />
           <label className={styles.labels} htmlFor="perfil">
-            Foto de perfil
+            Profile photo
           </label>
           <input
-            className={styles.password}
+            className={styles.imagen}
             id="perfil"
             name="perfil"
             type="file"
@@ -99,10 +98,10 @@ const Register = () => {
           />
           <button className={styles.boton} type="submit">
             {" "}
-            Crear cuenta
+           Create account
           </button>
           <div className={styles.links}>
-            <Link to="/login"> Logear</Link>
+            <Link to="/login"> Sig in</Link>
           </div>
         </form>
       </div>

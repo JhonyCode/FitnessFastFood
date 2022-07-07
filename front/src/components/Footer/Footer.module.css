@@ -2,10 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #F2994A;  /* fallback for old browsers */
+  background:black;
 padding: 1em;
   font-size: 1.4rem;
   height: 5vh;
   color: white;
-  text-shadow: black 2px 2px 10px;
 }

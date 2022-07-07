@@ -3,13 +3,12 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-style: italic;
   font-family: "Lato", sans-serif;
   background-repeat: no-repeat;
   background-size: cover;
-   background: #F2994A;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
+   background: #F5F5F5;
+   color: black;
 }
 
 
@@ -17,27 +16,34 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: black;
   font-size: 80px;
-  text-shadow: black 5px 0 10px;
 }
 .about {
-  text-shadow: black 5px 0 10px;
   margin-left: 55px;
   margin-right: 18px;
+  color: black;
+ font-style: italic;
+  font-weight: 700; 
 }
 
 h1 {
-  color: antiquewhite;
+  font-style: italic;
+  color: black;
   display: flex;
   justify-content: center;
   font-size: 3rem;
-  text-shadow: black 5px 0 10px;
 }
 h2 {
-  color: white;
+  font-style: italic;
+  color: black;
   display: flex;
   justify-content: center;
   font-size: 3rem;
-  text-shadow: black 5px 0 10px;
+}h4 {
+  font-style: italic;
+  color: black;
+  display: flex;
+  justify-content: center;
+  font-size: 2.1rem;
 }

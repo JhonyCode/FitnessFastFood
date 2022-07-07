@@ -6,7 +6,7 @@ export function UserDetails() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    fetch(`http://localhost:42267/admin/usuario/${id}`)
+    fetch(`http://localhost:8080/admin/usuario/${id}`)
       .then((res) => res.json())
       .then((data) => setUser(data.result));
   }, [id]);

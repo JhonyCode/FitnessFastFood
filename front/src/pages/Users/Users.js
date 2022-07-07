@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 export function Users() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch("http:///localhost:42267/admin/usuario/admin",
+    fetch("http:///localhost:8080/admin/usuario/admin",
     {
       method: "GET",
       headers: {

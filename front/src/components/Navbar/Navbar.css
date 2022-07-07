@@ -3,34 +3,40 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 7%;
-    background: #F2994A;
+    background: #e5e2e2;
   }
   
   .bars-button {
     display: none;
   }
   
+  .slogan{
+    margin-top: -2%;
+    font-size: 25px;
+    margin-left: 8%;
+  }
   .logo {
-color: white;
-text-shadow: black 5px 2px 10px;
-    font-weight: 900;
+    margin-top: -2%;
+    font-style: italic;
+    font-weight: 600;
+    color: black;
     letter-spacing: 1px;
     font-size: 2.5rem;
   }
   
   .links {
+    font-style: italic;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 30px;
-    text-shadow: black 2px 2px 7px;
   }
   
   .links a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 20px;
     letter-spacing: 1px;
-    font-weight: 600;
     padding: 10px 20px;
     position: relative;
   }
@@ -38,22 +44,22 @@ text-shadow: black 5px 2px 10px;
   .links a::after {
     position: absolute;
     content: "";
-    bottom: 5px;
+    bottom: 1px;
     left: 0;
     right: 0;
     width: 100%;
-    height: 5px;
-    background: #F2994A;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-    border-radius: 10px;
+    height: 1px;
+    /* background-color: #834E69; */
+    border-radius: 5px;
     transition: all 0.8s ease;
   }
   .links a:hover {
-        z-index: 1;
-    transition: all 0.8s ease;
-    font-weight: 600;
+    color: #834E69;
+    z-index: 1;
+    /* transition: all 0.8s ease; */
+  }
+  .links a:active{
+    color: antiquewhite;
   }
   .links a:hover::after {
     height: 80%;
@@ -63,6 +69,10 @@ text-shadow: black 5px 2px 10px;
     .navbar {
       padding: 25px 3%;
     }
+    .slogan
+    {
+      font-size: 19px;
+    }
     .links a {
       font-size: 16px;
     }
@@ -71,7 +81,9 @@ text-shadow: black 5px 2px 10px;
       font-size: 20px;
       margin-right: 30px;
     }
+ 
   }
+
   
   @media only screen and (max-width: 768px) {
       .links {
@@ -90,10 +102,7 @@ text-shadow: black 5px 2px 10px;
       left: 0;
       width: 100%;
       height: 100vh;
-background: #22c1c3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #fdbb2d, #22c1c3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+      background:#F5F5F5; 
       align-items: center;
       justify-content: center;
     }
@@ -107,7 +116,7 @@ background: linear-gradient(to left, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Fi
       position: relative;
     }
     .bars-button span {
-      background-color: #fff;
+      background-color: black;
       width: 100%;
       height: 2px;
       transition: all 0.3s ease;
@@ -122,6 +131,10 @@ background: linear-gradient(to left, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Fi
     .bars-button.active span:nth-child(3) {
       position: absolute;
       transform: rotate(45deg);
+    }
+    .slogan
+    {
+      font-size: 15px;
     }
   }
   

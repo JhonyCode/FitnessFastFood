@@ -3,7 +3,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 7%;
-    background: #e5e2e2;
+    background: #efe9e9;
+
   }
   
   .bars-button {
@@ -18,7 +19,6 @@
   .logo {
     margin-top: -2%;
     font-style: italic;
-    font-weight: 600;
     color: black;
     letter-spacing: 1px;
     font-size: 2.5rem;
@@ -26,7 +26,6 @@
   
   .links {
     font-style: italic;
-    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 30px;

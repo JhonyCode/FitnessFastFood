@@ -16,22 +16,17 @@ function Home() {
   return (
     <div>
       <h1>Welcome!</h1>
-      <h4>Latest posts</h4>
+      <h2>Latest posts</h2>
       <section className="seccion">
         {Publicaciones.map((publicacion) => (
           <div className="publicaciones" key={publicacion.id}>
+            <div className="titulo">{publicacion.titulo}</div>
             <div className="imagenes">
               <Link to={`/posts/${publicacion.id}`}>
                 <img src={publicacion.imagen} />
               </Link>
             </div>
-            <div className="titulo">{publicacion.titulo}</div>
-            {/* <div className="ingredientes">{publicacion.ingredientes}</div>
-            <div className="resumenes">{publicacion.resumen}</div>
-            <div className="resumenes">{publicacion.comentario}</div>
-            <div className="usuarios">{publicacion.usuario}</div>
-            <div className="valoraciones">{publicacion.valoracion} Sobre 5</div> */}
-          </div>
+         </div>
         ))}
       </section>
     </div>

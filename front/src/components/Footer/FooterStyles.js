@@ -5,6 +5,7 @@ export const Box = styled.div`
   position: absolute;
   width: 100%;
   align-items:center;
+  margin-top:5%;
   
    
   @media (max-width: 1000px) {
@@ -49,7 +50,6 @@ color:black;
   font-size: 18px;
   text-decoration: none;
   font-style: italic;
-  font-weight: 700;
    
   &:hover {
     

@@ -28,7 +28,6 @@ function Posts() {
     <GlobalContext.Provider value={{ page, setPage, pageTotal }}>
       <div>
         <h2 className="header">All posts</h2>
-        <Pagination limit={limit} />
         <section className="seccion">
           {Publicaciones.map((publicacion) => (
             <div className="publicaciones" key={publicacion.id}>
@@ -41,6 +40,7 @@ function Posts() {
             </div>
           ))}
         </section>
+        <Pagination limit={limit} />
       </div>
     </GlobalContext.Provider>
   );

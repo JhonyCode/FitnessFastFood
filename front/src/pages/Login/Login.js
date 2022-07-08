@@ -23,7 +23,7 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if(data.code===401){
-          swal("Usuario y/o contraseña incorrectos");
+          swal("User or password wrong");
         }
         else{
           localStorage.setItem("token", data.token);
@@ -32,7 +32,7 @@ const Login = () => {
             window.location.reload();}
         }
       }).catch((error)=>{
-          swal("Usuario y/o contraseña incorrectos");
+          swal("User or password wrong");
       })
   };
  

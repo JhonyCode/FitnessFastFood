@@ -22,6 +22,7 @@ export function UserPosts() {
       );
   }, []);
 
+  console.log(user);
   return (
     <>
       {user ? ( 

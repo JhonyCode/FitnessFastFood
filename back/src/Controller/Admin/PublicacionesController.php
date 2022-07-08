@@ -41,7 +41,7 @@ class PublicacionesController extends AbstractController
                 "titulo" => $c->getTitulo(),
                 'id' => $c->getId(),
                 "imagen" => $imagenPublicacion,
-                "ingredientes" =>'Ingredientes: ' . $c->getIngredientes(),
+                "ingredientes" =>$c->getIngredientes(),
                 "usuario" => 'Creado por: ' .  $c->getUsuario()->getNombre(),
                 "resumen" => $c->getResumen(),
                 'comentario' =>  $c->getValorNutricional()
@@ -106,9 +106,8 @@ class PublicacionesController extends AbstractController
                 "titulo" => $publicacione->getTitulo(),
                 'id' => $publicacione->getId(),
                 'imagen' => $imagenPublicacion,
-                "ingredientes" =>'Ingredientes: ' . $publicacione->getIngredientes(),
-                "usuario" => 'Creado por: ' .  $publicacione->getUsuario()->getNombre(),
-                "estado" => $publicacione->getEstado(),
+                "ingredientes" =>$publicacione->getIngredientes(),
+                "usuario" => 'Created by: ' .  $publicacione->getUsuario()->getNombre(),
                 "resumen" => $publicacione->getResumen(),
                 'comentario' =>$publicacione->getValorNutricional()
             ];

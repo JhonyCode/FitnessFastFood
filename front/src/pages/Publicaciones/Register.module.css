@@ -19,7 +19,6 @@ label{
 }
 .user::placeholder{
 color: black;
-font-weight: 600;
 font-size: 15px;
 background: #C8A0B5;
 }
@@ -29,7 +28,6 @@ background: #C8A0B5;
 }
 .password::placeholder{
 color: black;
-font-weight: 600;
 background: #C8A0B5;
 font-size: 15px;
 }

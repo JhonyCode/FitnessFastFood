@@ -20,11 +20,6 @@ class Publicaciones
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $estado;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $resumen;
@@ -82,18 +77,6 @@ class Publicaciones
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEstado(): ?int
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(int $estado): self
-    {
-        $this->estado = $estado;
-
-        return $this;
     }
 
     public function getResumen(): ?string

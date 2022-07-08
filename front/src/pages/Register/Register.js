@@ -37,7 +37,7 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         navigate("/login", { replace: true });
-        swal("Usuario registrado, ya puedes logear");
+        swal("You can sig in now!");
       });
 
   };

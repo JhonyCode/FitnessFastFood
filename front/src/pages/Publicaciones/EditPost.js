@@ -39,7 +39,7 @@ const EditPost = () => {
         swal("Post edited successfully");
         // navigate("/dashboard", { replace: true })
         if(data.code===500){
-          swal("Image syze too high")
+          swal("Image size too high")
         } else{
           navigate("/userposts", { replace: true })
         }

@@ -36,7 +36,7 @@ export function NewPost(){
         })
           .then((res) => res.json())
           .then((data) => {
-            swal("Publicacion añadida correctamente");
+            swal("Post created correctly");
             navigate("/userposts", { replace: true })
           });
     

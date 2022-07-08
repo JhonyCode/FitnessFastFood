@@ -47,7 +47,6 @@ padding: 1.5em 1em;
  .usuario::placeholder{
   background: #c8a0b5;
 color:black;
-  font-weight: 600;
 font-size: 15px;
   }
 

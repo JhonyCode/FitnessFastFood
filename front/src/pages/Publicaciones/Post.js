@@ -30,9 +30,9 @@ export function Post() {
           <div className="imagen">
               <img src={Publicaciones.imagen} />
           </div>
-          <div className="ingredientes">{Publicaciones.ingredientes}</div><br></br>
-          <div className="resumenes">{Publicaciones.resumen}</div><br></br>
-          <div className="ingredientes">{Publicaciones.comentario}</div><br></br>
+          <div className="ingredientes">Ingredients: {Publicaciones.ingredientes}</div><br></br>
+          <div className="resumenes">How to elaborate: {Publicaciones.resumen}</div><br></br>
+          <div className="ingredientes">Nutritional value:  {Publicaciones.comentario}</div><br></br>
           <div className="usuarios">{Publicaciones.usuario}</div>
           </div>
       ) : (

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../Contact/Contact.module.css"
 import swal from 'sweetalert';
 import {useParams } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 const EditPost = () => {
     const navigate = useNavigate();
   const params = useParams("");

@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import "./Publicaciones.css";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 export function UserPosts() {
   const [user, setUser] = useState();
-  const params = useParams("");
   const navigate = useNavigate();
   useEffect(() => {
     //Fetch para ver el usuario actual, obtenemos el token y así la información del usuario.

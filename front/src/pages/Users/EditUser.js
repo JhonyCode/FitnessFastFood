@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../Contact/Contact.module.css"
 import swal from 'sweetalert';
-import { useNavigate, useParams , Navigate  } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const EditUser = () => {
     const navigate = useNavigate();
   const params = useParams("");

@@ -17,7 +17,7 @@ export function Post() {
       })
         .then((data) => data.json())
         .then((data) => setPublicacion(data.result));
-    }, []);
+    }, [id]);
 
   return (
     <div>

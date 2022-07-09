@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Dashboard.module.css";
 import Spinner from "../../components/Spinner/Spinner";
-import { Navigate, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 export function Dashboard() {
   const [user, setUser] = useState();
 const navigate = useNavigate();

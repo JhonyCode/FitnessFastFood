@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 export function Dashboard() {
   const [user, setUser] = useState();
 const navigate = useNavigate();
+// Fetch para obtener información del usuario actual y comprobarlo con el TOKEN.
   useEffect(() => {
-    fetch("http://localhost:8080/admin/usuario/get", {
+    fetch("http://localhost:8080/api/usuario/get", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -21,6 +22,7 @@ const navigate = useNavigate();
 
   //console.log(user.publicaciones);
   return (
+    // Condicional, si hay usuario pintamos y si no, no.
     <>
       {user ? ( <div>
           <h1 className={styles.welcome}>Welcome {user.nombre} to your dashboard</h1>

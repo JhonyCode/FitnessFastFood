@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
 import { useEffect } from "react";
 const Navbar = () => {
+  //Comprobamos con el fetch si el usuario está logeado o no ( Si tiene token o no).
   const [user, setUser] = useState([]);
   const { token } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   useEffect(() => {
-    fetch("http:///localhost:8080/admin/usuario")
+    fetch("http:///localhost:8080/api/usuario")
       .then((res) => res.json())
       .then((data) => setUser(data.result));
   }, []);
@@ -20,6 +21,7 @@ const Navbar = () => {
     return setShow(!show);
   }
   return (
+    // Aquí comprobamos si el usuario tiene token, pintamos una cosa y si no , la otra.
     <div>
       {!token ? (
         <>

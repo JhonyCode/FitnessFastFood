@@ -5,6 +5,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 export function NewPost(){
   const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
+        // Guardamos información del formulario
         titulo: "",
         resumen: "",
         imagen: "",
@@ -12,11 +13,13 @@ export function NewPost(){
         comentario:""
       });
     const handleInputChange = (e) => {
+          // Metemos información del formulario en la variable formValues
         setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
       const handleSubmit = (e) => {
         e.preventDefault();
-    
+      //Funcion para el submit, evitamos la funcion por defecto y le decimos que 
+      // Coja la información recibida por formulario.
         let formData = new FormData();
         formData.append("titulo", formValues.titulo);
         formData.append("resumen", formValues.resumen);
@@ -25,8 +28,9 @@ export function NewPost(){
         formData.append("imagen", e.target.imagen.files[0]);
     
   
-    
-        fetch("http://localhost:8080/admin/publicaciones/new", {
+    // Fetch para crear nueva publicación. Si el usuario no está logeado, no podrá.
+    // Para ello hacemos la verificación del token en: Authorization.
+        fetch("http://localhost:8080/api/publicaciones/new", {
           method: "POST",
           body: formData,
           headers: {

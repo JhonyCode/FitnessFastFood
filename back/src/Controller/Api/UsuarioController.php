@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Api;
 
 use App\Entity\Usuario;
 use App\Form\UsuarioType;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/admin/usuario")
+ * @Route("/api/usuario")
  */
 class UsuarioController extends AbstractController
 {
@@ -24,6 +24,12 @@ class UsuarioController extends AbstractController
      */
     public function index(UsuarioRepository $usuarioRepository): Response
     {
+        //Funcion para sacar todos los usuarios.
+        // Solo accesible por el administrador .
+        // Buscamos en el repositorio todos lo susuarios y obtenemos la 
+        // Información.
+
+
         $usuarios = $usuarioRepository->findAll();
         $resultado = [];
         foreach ($usuarios as $c) {
@@ -40,33 +46,21 @@ class UsuarioController extends AbstractController
     }
 
     /**
-     * @Route("/image", name="app_admin_usuario_new", methods={"GET", "POST"})
-     */
-    // public function image(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, UsuarioRepository $usuarioRepository): Response
-    // {
-    //     if(!empty($imagen))
-    //     {
-    //         if(!empty($imagen->getClientOriginalName()))
-    //         {
-    //             $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
-    //             $imagen->move('uploads/', $nombreImagen);
-    //         }
-    //     }
-    // }
-
-    /**
      * @Route("/new", name="app_admin_usuario_new", methods={"GET", "POST"})
      */
     public function new(Request $request,  EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher ): Response
     {
-        // $data = $request->toArray();
-      
+        // Función para crear nuevo usuario.
+        
+        // Declaramos las variables donde se guardará la información.
+
         $resultado = "ko";
         $passwordRequest = $request->request->get("password");
         $usuarioName = $request->request->get("username");
         $usuarioNombre = $request->request->get("nombre");
         $imagen = $request->files->get('perfil');
         
+        // Sí el username no está vacío, seguimos.
         if(!empty($usuarioName)){
             $nombreImagen = '';
             if (!empty($imagen)) {
@@ -75,8 +69,13 @@ class UsuarioController extends AbstractController
                     $imagen->move('uploads/', $nombreImagen);
                 }
             }
+
+            //Creamos el usuario con la información obtenida del formulario.
+
             $usuario = new Usuario();
             
+            //Aquí estamos hasheando la contraseña para que se guarde así en la BD.
+
             $hashedPassword = $passwordHasher->hashPassword(
                 $usuario,
                 $passwordRequest
@@ -99,6 +98,10 @@ class UsuarioController extends AbstractController
      */
     public function token1(UserPasswordHasherInterface $passwordHasher,EntityManagerInterface $em, Request $request, UsuarioRepository $usuarioRepository, $id): Response
     {
+        //Función para editar usuario.
+    
+        //Obtenemos la información actual del usuario.
+
         $resultado = "ko";
         $passwordRequest = $request->request->get("password");
         $usuarioName = $request->request->get("username");
@@ -106,6 +109,8 @@ class UsuarioController extends AbstractController
         $usuarioNombre = $request->request->get("nombre");
         $imagen = $request->files->get('perfil');
         
+        // Sí no está vacío el campo Username(Email), seguimos.
+
         if(!empty($usuarioName)){
             $nombreImagen = '';
             if (!empty($imagen)) {
@@ -114,12 +119,15 @@ class UsuarioController extends AbstractController
                     $imagen->move('uploads/', $nombreImagen);
                 }
             }
+            //Obtenemos usuario por ID.
             $usuario= $usuarioRepository->find($id);
             $hashedPassword = $passwordHasher->hashPassword(
                 $usuario,
                 $passwordRequest
             );
             
+            //Le añadimos la nueva información al usuario.
+
             $usuario->setNombre($usuarioNombre);
             $usuario->setEmail($usuarioName);
             $usuario->setPerfil($nombreImagen);
@@ -131,22 +139,6 @@ class UsuarioController extends AbstractController
         return $this->json([
             'resultado' => $resultado
         ]);
-        // /** @var User $user */
-        // $user = $this->getUser();
-        // $data = $request->toArray();
-        // $resultado = "ko";
-        // if (isset($data["nombre"])) {
-        //     $user->setNombre($data["nombre"]);
-        //     $user->setEmail($data["email"]);
-        //     $user->setPerfil($data["perfil"]);
-
-        //     $em->persist($user);
-        //     $em->flush();
-        // }
-
-        // return $this->json([
-        //     'resultado' => $resultado
-        // ]);
     }
 
 
@@ -155,11 +147,17 @@ class UsuarioController extends AbstractController
      */
     public function token(EntityManagerInterface $em, Request $request, PublicacionesRepository $publicacionesRepository): Response
     {
+        //Función para obtener token del usuario actual e información del 
+        // usuario.
+
+        // Obtenemos el usuario actual.
         /** @var User $user */
         $user = $this->getUser();
-        //$tokenStorage = $request->query->get('token');
         $resultado = [];
         $listasPublicaciones = [];
+
+        //Obtenemos sus publicaciones 
+
         $publicaciones = $publicacionesRepository->findBy(['usuario' => $user->getId()]);
         if(!empty($publicaciones)){
             foreach ($publicaciones as $publicacion) {
@@ -168,17 +166,17 @@ class UsuarioController extends AbstractController
                     "imagen" =>'http://localhost:8080/uploads/' .$publicacion->getImagen(),
                     "id" => $publicacion->getId()
                 ];
-                //$publicacion->getTitulo();
-                //$publicacion->getImagen();
             }
         }
 
+        // Si el perfil del usuario (Avatar) no está vacío, seguimos.
         if(!empty($user->getPerfil()))
         {
             $imagenPerfil='http://localhost:8080/uploads/'.$user->getPerfil();
         }
         else{$imagenPerfil='';}
 
+        // Obtenemos toda la información del usuario, incluidas sus publicaciones.
         $resultado = [
             'id' => $user->getId(),
              'nombre' => $user->getNombre(),
@@ -197,6 +195,9 @@ class UsuarioController extends AbstractController
      */
     public function show(PublicacionesRepository $publicacionesRepository, UsuarioRepository $usuarioRepository, $id): Response
     {
+        // Función para ver la información de un usuario.
+
+        //Obtenemos usuario por id.
         $usuario = $usuarioRepository->find($id);
         $resultado = [];
         $listaPublicaciones = [];
@@ -224,51 +225,6 @@ class UsuarioController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="app_admin_usuario_edit", methods={"GET", "POST"})
-     */
-    public function edit(
-        Request $request,
-        Usuario $usuario,
-        UsuarioRepository $usuarioRepository,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response {
-        if (
-            !$this->isGranted('ROLE_SUPERADMIN')
-            && $usuario->getUserIdentifier() != $this->getUser()->getUserIdentifier()
-        ) {
-            throw $this->createAccessDeniedException('No puedes editar un usuario que no sea tuyo');
-        }
-        $oldPassword = $usuario->getPassword();
-        $oldRoles = $usuario->getRoles();
-        $form = $this->createForm(UsuarioType::class, $usuario, [
-            'isSuperadmin' => $this->isGranted('ROLE_SUPERADMIN')
-        ]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($usuario->getPassword() == '') {
-                $usuario->setPassword($oldPassword);
-            } else {
-                $hashedPassword = $passwordHasher->hashPassword(
-                    $usuario,
-                    $usuario->getPassword()
-                );
-                $usuario->setPassword($hashedPassword);
-            }
-            if (!$this->isGranted('ROLE_SUPERADMIN')) {
-                $usuario->setRoles($oldRoles);
-            }
-            $usuarioRepository->add($usuario, true);
-
-            return $this->redirectToRoute('app_admin_usuario_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin/usuario/edit.html.twig', [
-            'usuario' => $usuario,
-            'form' => $form,
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="app_admin_usuario_delete", methods={"POST"})

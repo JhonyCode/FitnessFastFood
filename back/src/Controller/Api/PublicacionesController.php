@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Api;
 
 use App\Entity\Publicaciones;
 use App\Entity\Usuario;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/publicaciones")
+ * @Route("/api/publicaciones")
  */
 class PublicacionesController extends AbstractController
 {
@@ -24,8 +24,9 @@ class PublicacionesController extends AbstractController
      */
     public function index(PublicacionesRepository $publicacionesRepository, Request $request): Response
     {
-        //?page=1&limit=4
-
+        //Creamos aquí el paginador, para que muestre como máximo 20 items 
+        //por página.
+         
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 20);
         //calculamos el offset de los registros
@@ -33,9 +34,15 @@ class PublicacionesController extends AbstractController
         
         $totalRegistros = count($publicacionesRepository->findAll());
 
+        //Obtenemos todas las publicaciones desde el repositorio.
+
         $publicacione = $publicacionesRepository->findBy([],['id'=>'DESC'],$limit, $offset);
         $resultado = [];
         foreach ($publicacione as $c) {
+
+            //Sacamos la imagen desde la url de subida 
+            // Y sacamos la información de cada publicación con el foreach.
+
             $imagenPublicacion='http://localhost:8080/uploads/'.$c->getImagen();
             $resultado[] = [
                 "titulo" => $c->getTitulo(),
@@ -47,6 +54,10 @@ class PublicacionesController extends AbstractController
                 'comentario' =>  $c->getValorNutricional()
             ];
         }
+        // Lo retornamos como "result" así en react será más fácil obtener
+        // la información , ya que todos los result serán llamados de igual
+        //manera
+
         return $this->json([
             'result' => $resultado,
             'count' => $totalRegistros
@@ -58,6 +69,11 @@ class PublicacionesController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $em): Response
     {
+        // Obtenemos el usuario , si no está logeado no podrá publicar.
+        // A continuación, obtenemos la información del formulario,
+        // Enviada por el usuario, después se publicará la publicación.
+
+
         /** @var User $user */
         $usuario = $this->getUser();
         $resultado = "ko";
@@ -75,9 +91,14 @@ class PublicacionesController extends AbstractController
                     $imagen->move('uploads/', $nombreImagen);
                 }
             }
+             // Aquí creamos la publicación, con la información introducida
+             // Por el usuario.
 
             $publicacion = new Publicaciones();
-            
+
+            // Obtenemos toda la información dada por el usuario y 
+            // la introducimos en la publicación.
+
             $publicacion->setUsuario($usuario);
             $publicacion->setTitulo($publicacionTitulo);
             $publicacion->setResumen($publicacionResumen);
@@ -89,8 +110,9 @@ class PublicacionesController extends AbstractController
             $em->persist($publicacion);
             $em->flush();
         }
+        //Aquí lo retornamos com "result", Toda la información.
         return $this->json([
-            'resultado' => $resultado
+            'result' => $resultado
         ]);
     }
 
@@ -99,7 +121,10 @@ class PublicacionesController extends AbstractController
      */
     public function show(Publicaciones $publicacione): Response
     {
-
+        // Función para sacar la publicación por ID, cuando el usuario
+        // Pincha en una publicación, hara éste fetch y obtendrá 
+        // Toda la información de esa publicación,
+        // El código es parecido al de ver todas las publicaciones.
 
             $imagenPublicacion='http://localhost:8080/uploads/'.$publicacione->getImagen();
             $resultado = [
@@ -112,22 +137,9 @@ class PublicacionesController extends AbstractController
                 'comentario' =>$publicacione->getValorNutricional()
             ];
 
+            //Como siempre, devolvemos la respuesta en un JSON.
+
         return $this->json(['result' => $resultado]);
-        // $resultado=[
-        //     "titulo" => $publicacione->getTitulo(),
-        //     'id' => $publicacione->getId(),
-        //     "imagen" => $publicacione->getImagen(),
-        //     "ingredientes" => 'Ingredientes: ' . $publicacione->getIngredientes(),
-        //     "usuario" => 'Creado por: ' .  $publicacione->getUsuario()->getNombre(),
-        //     "estado" => $publicacione->getEstado(),
-        //     "resumen" => 'Elaboración: ' . $publicacione->getResumen(),
-        //     'comentario' => 'Valor nutricional: ' . $publicacione->getValorNutricional()
-        
-        // ];
-    
-        //     return $this->json([
-        //         'result' => $resultado
-        //     ]);
     }
 
     /**
@@ -135,6 +147,9 @@ class PublicacionesController extends AbstractController
      */
     public function edit( EntityManagerInterface $em, Request $request, Publicaciones $publicacione, PublicacionesRepository $publicacionesRepository): Response
     {
+        // Función para editar una publicación.
+
+        // Obtenemos la información de la publicación.
         $resultado = "ko";
         $publicacionTitulo = $request->request->get("titulo");
         $publicacionValor = $request->request->get("comentario");
@@ -142,6 +157,10 @@ class PublicacionesController extends AbstractController
         $publicacionIngredientes = $request->request->get("ingredientes");
         $imagen = $request->files->get('imagen');
         
+        // Si el título no está vacío al hacer el Edit de la publicación,
+        // Entonces hacemos el fetch y cambiamos la información de  la 
+        // publicación.
+
         if(!empty($publicacionTitulo)){
             $nombreImagen = '';
             if (!empty($imagen)) {
@@ -150,7 +169,9 @@ class PublicacionesController extends AbstractController
                     $imagen->move('uploads/', $nombreImagen);
                 }
             }
-            
+            // Aquí obtenemos la información del formnulario y la introducimos
+            // en la publicación, si algun campo no es modificado, se queda como está.
+
             $publicacione->setTitulo($publicacionTitulo);
             $publicacione->setValorNutricional($publicacionValor);
             $publicacione->setImagen($nombreImagen);
@@ -170,6 +191,11 @@ class PublicacionesController extends AbstractController
      */
     public function delete(EntityManagerInterface $em, PublicacionesRepository $publicacionesRepository, $id): Response
     {   
+        // Función para eliminar una publicación.
+
+        // Si la ID no está vacía , es decir: Obtenemos la información de la 
+        // publicación, entonces la eliminamos.
+        
         $resultado="ko";
         if(!empty($id)){
             $publicacion = $publicacionesRepository->find($id);

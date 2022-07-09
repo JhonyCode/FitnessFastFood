@@ -1,23 +1,24 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate} from "react-router-dom";
-import { AuthContext } from "../../components/AuthContext";
 import styles from "../Contact/Contact.module.css"
 import swal from "sweetalert";
 const Contact = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useContext(AuthContext);
+  // Guardamos la información del formulario en formValues.
   const [formValues, setFormValues] = useState({
     nombre: "",
     mensaje: "",
     email: "",
   });
+// función para guardar la información en el formulario.
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
+    //Evitamos con preventDefault que el formulario haga cosas por defecto y hacemos el Fetch.
     e.preventDefault();
-    fetch("http:///localhost:8080/contacto/new", {
+    fetch("http:///localhost:8080/api/contacto/new", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {

@@ -9,6 +9,8 @@ import {
 } from "./FooterStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   
+//Declaramos el footer y hacemos la estructura importando los elementos declarados
+// en FooterStyles.js
 const Footer = () => {
   return (
     <Box>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Contacto;
 use App\Form\ContactoType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/contacto")
+ * @Route("api/contacto")
  */
 class ContactoController extends AbstractController
 {
@@ -31,6 +31,8 @@ class ContactoController extends AbstractController
      */
     public function new(Request $request, contactoRepository $contactoRepository, EntityManagerInterface $em): Response
     {
+        //Crear contacto nuevo:
+        
         $data = $request->toArray();
 
         $resultado="ko";

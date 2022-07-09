@@ -48,6 +48,7 @@ background: #C8A0B5;
   }
 
 .boton{
+  cursor: pointer;
   background: #F5F5F5;
   padding: 10px;
   border-radius: 8px;

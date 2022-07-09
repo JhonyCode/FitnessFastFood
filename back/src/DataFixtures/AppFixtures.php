@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categoria;
 use App\Entity\Comentario;
 use App\Entity\Valoraciones;
 use App\Entity\Publicaciones;
@@ -25,7 +24,6 @@ class AppFixtures extends Fixture
 
                 for ($k = 0; $k < 6; $k++) {
                     $publicaciones = new Publicaciones();
-                    $publicaciones->setEstado(1);
                     $publicaciones->setImagen(1);
                     $publicaciones->setResumen('Resumen Número' . $k);
                     $publicaciones->setTitulo('Título Número' . $k);

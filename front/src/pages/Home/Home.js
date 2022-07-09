@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 function Home() {
   const [Publicaciones, setPublicaciones] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8080/admin/publicaciones?page=1&limit=4", {
+    // Fetch para obtener últimas publicaciones.
+    fetch("http://localhost:8080/api/publicaciones?page=1&limit=4", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

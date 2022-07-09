@@ -30,7 +30,6 @@ padding: 1.5em 1em;
 }
 .contactform input,
 .contactform button{
-
   resize: none;
   width: 100%;
   padding: .5rem .3rem;
@@ -38,7 +37,9 @@ padding: 1.5em 1em;
   border-radius: 0.3rem;
   font-size: 1.5rem;
 }
- 
+ .contactform button{
+  cursor: pointer;
+ }
   .usuario{ padding: 10px;
     border-radius: 8px;
     background: #c8a0b5;

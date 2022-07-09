@@ -6,12 +6,16 @@ import swal from 'sweetalert';
 
 const Login = () => {
   const navigate = useNavigate();
+  // Variables para guardar información del formulario.
+  
   const [formValues, setFormValues] = useState({ username: "", password: "" });
 
   const handleInputChange = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
+    //Evitamos las funciones por defecto del formuarlio y hacemos fetch.
+
     e.preventDefault();
     fetch("http://localhost:8080/api/login_check", {
       method: "POST",

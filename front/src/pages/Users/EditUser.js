@@ -25,7 +25,7 @@ const EditUser = () => {
     formData.append("username", formValues.username);
     formData.append("perfil", e.target.perfil.files[0]);
 
-    fetch(`http://localhost:8080/admin/usuario/editar/${params.id}`, {
+    fetch(`http://localhost:8080/api/usuario/editar/${params.id}`, {
       method: "POST",
       body: formData,
       headers: {
@@ -60,7 +60,7 @@ const generarNuevoToken= (newUser, newPass)=>{
 
   useEffect(() => {
     //?token=${localStorage.getItem("token")}
-    fetch(`http:///localhost:8080/admin/usuario/get`, {
+    fetch(`http:///localhost:8080/api/usuario/get`, {
         method: "GET",
         headers: {
           Authorization : 'Bearer ' + localStorage.getItem('token')

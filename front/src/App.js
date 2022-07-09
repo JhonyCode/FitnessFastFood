@@ -8,8 +8,6 @@ import { NotFound } from "./pages/NotFound/NotFound";
 import { BrowserRouter } from "react-router-dom";
 import Posts from "./pages/Publicaciones/Posts";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
-import { UserDetails } from "./pages/Users/UserDetails";
-import { Users } from "./pages/Users/Users";
 import Register from "./pages/Register/Register";
 import { Post } from "./pages/Publicaciones/Post";
 import EditUser from "./pages/Users/EditUser";
@@ -24,10 +22,6 @@ function App() {
         <Route path="/posts">
           <Route index element={<Posts />} />
           <Route path=":id" element={<Post />} />
-        </Route>
-        <Route path="admin/usuarios">
-          <Route index element={<Users />} />
-          <Route path=":id" element={<UserDetails />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/newpost" element={<NewPost />} />

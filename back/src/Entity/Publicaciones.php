@@ -40,11 +40,6 @@ class Publicaciones
     private $valoraciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categoria::class, inversedBy="publicaciones")
-     */
-    private $categoria;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="publicaciones")
      */
     private $usuario;
@@ -141,18 +136,6 @@ class Publicaciones
                 $valoracione->setPublicacion(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCategoria(): ?Categoria
-    {
-        return $this->categoria;
-    }
-
-    public function setCategoria(?Categoria $categoria): self
-    {
-        $this->categoria = $categoria;
 
         return $this;
     }

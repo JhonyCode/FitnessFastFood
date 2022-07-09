@@ -27,7 +27,7 @@ const Register = () => {
     formData.append("perfil", e.target.perfil.files[0]);
 
 
-    fetch("http://localhost:8080/admin/usuario/new", {
+    fetch("http://localhost:8080/api/usuario/new", {
       method: "POST",
       body: formData,
       headers: {

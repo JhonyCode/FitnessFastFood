@@ -7,8 +7,9 @@ export function Post() {
   const { id } = useParams();
   const [Publicaciones, setPublicacion] = useState();
 
+  // Fetch para obtener información de una publicación por ID.
   useEffect(() => {
-    fetch(`http://localhost:8080/admin/publicaciones/${id}`, {
+    fetch(`http://localhost:8080/api/publicaciones/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

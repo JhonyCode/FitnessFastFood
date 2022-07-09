@@ -1,7 +1,6 @@
 import {createContext, useContext, useEffect, useState } from "react";
 import "../Publicaciones/Publicaciones.css";
 import { Link } from "react-router-dom";
-
 export const GlobalContext = createContext({});
 
 function Posts() {
@@ -9,10 +8,12 @@ function Posts() {
   const [pageTotal, setPageTotal] = useState(1);
   const [Publicaciones, setPublicaciones] = useState([]);
 
-  let limit = 4;
+  const limit = 4;
 
+  // Fetch para obtener todas las publicaciones. con el paginador le decimos 
+  // La cantidad de publicaciones por página cambiando el limit.
   useEffect(() => {
-    fetch(`http://localhost:8080/admin/publicaciones?page=${page}&limit=${limit}`, {
+    fetch(`http://localhost:8080/api/publicaciones?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +54,7 @@ export function Pagination(props){
   const {page, setPage} = useContext(GlobalContext);
   const {pageTotal} = useContext(GlobalContext);
   //Creamos la variable total de paginas
-  let total=0;
+  const total=0;
   //Calculamos el numero de paginas totales
   total=Math.ceil(pageTotal/parseInt(props.limit));
 

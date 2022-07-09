@@ -9,7 +9,9 @@ export function UserPosts() {
   const params = useParams("");
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:8080/admin/usuario/get", {
+    //Fetch para ver el usuario actual, obtenemos el token y así la información del usuario.
+
+    fetch("http://localhost:8080/api/usuario/get", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -24,6 +26,7 @@ export function UserPosts() {
 
   console.log(user);
   return (
+    // si hay usuario, pintamos publicaciones de ese usuario.
     <>
       {user ? ( 
         <div>
@@ -38,14 +41,21 @@ export function UserPosts() {
                 </Link>
               </div>
               <div className="seccion">
+                    {/*  Botón para EDITAR publicacion.*/}
               <button className="button1"onClick={()=>{
                 navigate(`/editpost/${publicacion.id}`, { replace: true })
               }} > Edit</button>
                 <div>
+
+                  {/*  Botón para BORRAR publicacion.*/}
+
               <button className="button1"
               onClick={() => {
+
+               {/* Le mandamos una alerta al usuario de si está seguro.*/}
+
               if (window.confirm("Are you sure?") ) {fetch(
-              `http://localhost:8080/admin/publicaciones/delete/${publicacion.id}`,{
+              `http://localhost:8080/api/publicaciones/delete/${publicacion.id}`,{
                 method: "DELETE",
                 headers: {
                   "Content-Type": "application/json",
@@ -58,9 +68,12 @@ export function UserPosts() {
                  if (data.result === "ok") {
                  window.location.reload();}})}}}> 
                  Delete</button>
+
+                     {/*  Botón para ir atrás.*/}
                  <button className="button1"onClick={()=>{
                 navigate("/dashboard", { replace: true })
               }} > Back</button>
+                  {/*  Botón para CREAR publicacion.*/}
                    <button className="button1"onClick={()=>{
                 navigate("/newpost", { replace: true })
               }} > New post</button>
@@ -76,6 +89,7 @@ export function UserPosts() {
           <Spinner />
         </div>
       )}
+      
     </>
   );
 }

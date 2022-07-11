@@ -54,8 +54,7 @@ export function Pagination(props){
   const {page, setPage} = useContext(GlobalContext);
   const {pageTotal} = useContext(GlobalContext);
   //Creamos la variable total de paginas
-  const total=0;
-  //Calculamos el numero de paginas totales
+  const
   total=Math.ceil(pageTotal/parseInt(props.limit));
 
   if(total>1)

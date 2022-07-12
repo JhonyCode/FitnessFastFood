@@ -65,7 +65,7 @@ npm run build
 | localhost:8080/api/categoria | GET | Complete info of categories |  Admin |
 | localhost:8080/api/contacto/new | POST | Send a contact message |  public |
 | localhost:8080/api/contacto/{id}/edit | GET/POST | Edit contact message |  Admin |
- localhost:8080/api/contacto/{id}/delete | DELETE | Delete contact message |  Admin |
+| localhost:8080/api/contacto/{id}/delete | DELETE | Delete contact message |  Admin |
 | localhost:8080/api/publicaciones | GET | Complete info of all posts|  public |
 | localhost:8080/api/publicaciones/{id} | GET | Complete info of one post |  public |
 | localhost:8080/api/publicaciones/delete/{id} | DELETE | Delete the user post |  user |

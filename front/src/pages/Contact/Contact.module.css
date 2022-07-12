@@ -1,93 +1,90 @@
-.labels{
-  display: flex;
-  justify-content: center;
-  color:black;
+.labels {
+  color: black;
   font-size: 35px;
+  margin: 0;
+  font-family: "Roboto";
 }
 .default {
   margin-bottom: 251px;
-  height: 100%;
+  margin: 10px 5%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-      }
-.contactform{
-  width: 30%;
-padding: 1.5em 1em;
-        border-radius: 0.3rem;
-        font-size: 1.2rem;
-      }
+}
+.contactform {
+  background-color: #e0e0e0;
+  width: 35%;
+  padding: 1.5em 1.5em;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+}
 
 .contactform textarea {
-
   resize: none;
   width: 100%;
-  padding: 2.5rem .3rem;
-  margin: 0 0 0.8em;
+  margin-top: 25px;
+  margin-bottom: 25px;
   border-radius: 0.3rem;
   font-size: 1.5rem;
+}
+.contactform input {
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 .contactform input,
-.contactform button{
+.contactform button {
   resize: none;
   width: 100%;
-  padding: .5rem .3rem;
-  margin: 0 0 0.8em;
-  border-radius: 0.3rem;
   font-size: 1.5rem;
 }
- .contactform button{
+.contactform button {
   cursor: pointer;
- }
-  .usuario{ padding: 10px;
-    border-radius: 8px;
-    background: #c8a0b5;
-    
-  }
- .usuario::placeholder{
-  background: #c8a0b5;
-color:black;
-font-size: 15px;
-  }
+}
+.usuario {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f2dad4;
+}
+.usuario::placeholder {
+  background: #f2dad4;
+  color: black;
+  font-size: 15px;
+}
 
-  .boton{
-    padding: 10px;
-    border-radius: 8px;
-    margin-left: 15px;
-    }
-    .boton:hover{
-      transition: all 0.8s ease;
-      background:#c8a0b5;
-        
-    }
-    
-    @media only screen and (max-width: 768px) {
-      .default {
-        display: flex;
-        width: 80%;
-   }
-   .contactform{
-     width: 80%;
-     padding: 1.5em 1em;
-             border-radius: 0.3rem;
-             font-size: 1.2rem;
-           }
-   .contactform input,
-   .contactform textarea,
-   .contactform button {
-   
+.boton {
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 15px;
+}
+.boton:hover {
+  transition: all 0.8s ease;
+  background: #f2dad4;
+}
+
+@media only screen and (max-width: 768px) {
+  .default {
+    display: flex;
+    width: 80%;
+  }
+  .contactform {
+    width: 80%;
+    padding: 1.5em 1em;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+  }
+  .contactform input,
+  .contactform textarea,
+  .contactform button {
     font-size: 15px;
-     resize: none;
-     width: 100%;
-     /* padding: .5rem .3rem; */
-     margin: 1em 0 0;
-     border-radius: 0.3rem;
-     font-size: 1.5rem;
-   }
-   h1{
+    resize: none;
+    width: 100%;
+    /* padding: .5rem .3rem; */
+    margin: 1em 0 0;
+    border-radius: 0.3rem;
+    font-size: 1.5rem;
+  }
+  h1 {
     font-size: 30px;
-   }
-      }
-
-
+  }
+}

@@ -23,7 +23,7 @@ export function Post() {
     <div>
       <Link className="linkpu" to={"/posts"}>
       Go back to list</Link>
-    <div className="seccion1">
+    <div className="seccion">
     
            {Publicaciones ? (
           <div className="publicacion">

@@ -13,13 +13,12 @@ export const Box = styled.div`
 
   @media (max-width: 1000px) {
     padding: 70px 30px;
-    max-width:456px;
   }
   @media (max-width: 800px) {
     padding: 70px 30px;
-    max-width:426px;
+
   }
-`;
+`
    // Creamos los contenedores.
 export const Container = styled.div`
     display: flex;

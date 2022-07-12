@@ -1,112 +1,114 @@
 .login {
   margin-top: -30px;
-    font-size: 35px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 230px;
-    flex-wrap: nowrap;
-  
-  }
-  .links a {
-    color:black;
-    margin-top: 48px;
-    font-size: 40px;
-    text-decoration: none;
-    display: flex;
-  justify-content: center; 
-
-  }
-  .links a:hover{
-    color: #c8a0b5;
-    transition: all 0.5s ease;
-  }
-  .labels{
-    display: flex;
-    justify-content: center;
-    color:black;
-    font-size: 35px;
-  }
-
-  .user{
-    padding: 10px;
-    border-radius: 8px;
-    background: #C8A0B5;
-  }
- .user::placeholder{
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 230px;
+  flex-wrap: nowrap;
+}
+.links a {
   color: black;
-font-size: 15px;
-background:#C8A0B5;
-  }
-  .password{ padding: 10px;
-    border-radius: 8px;
-    background: #C8A0B5;
-  }
- .password::placeholder{
+  margin-top: 48px;
+  font-size: 40px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+.links a:hover {
+background-color: #f2dad4;
+  transition: all 0.2s ease;
+}
+.labels {
   color: black;
-font-size: 15px;
-background: #C8A0B5;
-  }
+  font-size: 35px;
+  margin: 0;
+  font-family: "Roboto";
+}
 
-.boton{
+.contactform input {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.user {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f2dad4;
+}
+.user::placeholder {
+  color: black;
+  font-size: 15px;
+  background: #f2dad4;
+}
+.password {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f2dad4;
+}
+.password::placeholder {
+  color: black;
+  font-size: 15px;
+  background: #f2dad4;
+}
+
+.boton {
   cursor: pointer;
-  background: #F5F5F5;
+  background: #f5f5f5;
   padding: 10px;
   border-radius: 8px;
   margin-left: 15px;
-  }
-  .boton:hover{
-    transition: all 0.5s ease;
-    background: #C8A0B5;
-  }
+}
+.boton:hover {
+  transition: all 0.5s ease;
+  background: #f2dad4;
+}
+.default {
+  margin-bottom: 251px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.contactform {
+  background-color: #e0e0e0;
+  width: 35%;
+  padding: 1.5em 1.5em;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+}
+.contactform input,
+.contactform textarea,
+.contactform button {
+  resize: none;
+  width: 100%;
+  padding: 0.5rem 0.3rem;
+  border-radius: 0.3rem;
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 768px) {
   .default {
-    margin-bottom: 251px;
-    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-        }
-  .contactform{
-  width: 30%;
-  padding: 1.5em 1em;
-          border-radius: 0.3rem;
-          font-size: 1.2rem;
-        }
+    width: 80%;
+  }
+  .contactform {
+    width: 80%;
+    padding: 1.5em 1em;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+  }
   .contactform input,
   .contactform textarea,
   .contactform button {
-  
+    font-size: 15px;
     resize: none;
     width: 100%;
-    padding: .5rem .3rem;
+    /* padding: .5rem .3rem; */
     margin: 1em 0 0;
     border-radius: 0.3rem;
     font-size: 1.5rem;
   }
-  @media only screen and (max-width: 768px) {
-    .default {
-      display: flex;
-      width: 80%;
- }
- .contactform{
-   width: 80%;
-   padding: 1.5em 1em;
-           border-radius: 0.3rem;
-           font-size: 1.2rem;
-         }
- .contactform input,
- .contactform textarea,
- .contactform button {
- 
-  font-size: 15px;
-   resize: none;
-   width: 100%;
-   /* padding: .5rem .3rem; */
-   margin: 1em 0 0;
-   border-radius: 0.3rem;
-   font-size: 1.5rem;
- }
- h1{
-  font-size: 30px;
- }
-    }
+  h1 {
+    font-size: 30px;
+  }
+}

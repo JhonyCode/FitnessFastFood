@@ -5,7 +5,7 @@
   color: black;
   margin-bottom: 60px;
 }
-.button1{
+.button1 {
   cursor: pointer;
   border: 2px solid black;
   width: 100px;
@@ -26,29 +26,32 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-.seccion1 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 img {
   width: 100%;
   height: auto;
   margin-top: 3px;
 }
-.imagenes img { 
-
-  border-radius: 3%;
+.imagenes img:hover {
+  border-radius:50%;
+  -webkit-border-radius:50%;
+  box-shadow: 0px 0px 15px 15px #8c8c8c;
+  -webkit-box-shadow: 0px 0px 6px 6px #8c8c8c;
+  transition: all 0.2s linear;
+}
+.imagenes img {
+  box-shadow: 3px 3px 3px 3px #aeaaaa;
+  border-radius: 1%;
   object-fit: cover;
   object-position: center;
   aspect-ratio: 4/4;
 }
 .imagen img {
+  box-shadow: 3px 3px 3px 3px #aeaaaa;
+  border-radius: 1%;
   object-fit: cover;
   object-position: center;
-  border-radius: 5px;
-  width: 350px;
-  height: 350px;
+  aspect-ratio: 4/4;
+  margin-bottom: 5%;
 }
 
 .titulo {
@@ -74,19 +77,18 @@ img {
     object-position: center;
     border-radius: 5px;
   }
-  .publicacion{
+  .publicacion {
     width: 50%;
   }
 }
 
 .publicacion {
-  width: 25%;
-  margin: 10px 1%;
+  width: 30%;
+  margin: 10px 2%;
   text-align: center;
   color: black;
-  font-style: italic;
+  margin-bottom: 60px;
   font-size: 25px;
-
 }
 @media only screen and (max-width: 768px) {
   .publicaciones {
@@ -101,7 +103,7 @@ img {
     width: 350px;
     height: 350px;
   }
-  .publicacion{
+  .publicacion {
     font-size: 18px;
     margin: 10px 10%;
   }
@@ -109,43 +111,42 @@ img {
     justify-content: center;
     display: flex;
   }
-  h2{
+  h2 {
     text-align: center;
-   font-size: 26px;
+    font-size: 26px;
   }
 }
-@media only screen and (max-width: 568px){
-  .publicacion{
+@media only screen and (max-width: 568px) {
+  .publicacion {
     width: 90%;
   }
 }
-.paginado{
+.paginado {
   display: flex;
   justify-content: center;
   /* justify-content: space-around; */
 }
-.paginado button{
+.paginado button {
   margin-left: 18%;
   margin-right: 18%;
   padding: 10px;
   border: 0;
   border-radius: 7%;
-  background-color:white;
+  background-color: white;
   font-size: 20px;
   font-style: italic;
   color: black;
   border: 1px solid black;
   cursor: pointer;
-  transition: all .3s linear;
-
+  transition: all 0.3s linear;
 }
-.paginado button:hover{
+.paginado button:hover {
   background-color: #c8a0b5;
 }
-.titulo1{
+.titulo1 {
   font-size: 2em;
 }
-.linkpu{
+.linkpu {
   text-decoration: none;
   color: black;
   font-style: italic;
@@ -156,6 +157,6 @@ img {
   margin-bottom: 25px;
   margin-top: 10px;
 }
-.linkpu:hover{
+.linkpu:hover {
   color: #c8a0b5;
 }

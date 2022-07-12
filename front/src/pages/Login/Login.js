@@ -65,7 +65,7 @@ const Login = () => {
             values={formValues.password}
             placeholder="Enter your password"
           />
-          <button className={styles.boton} type="submit">Sig in</button>
+          <button className={styles.boton} type="submit">Sign in</button>
           <div className={styles.links}><Link to="/register">Sign up</Link></div>
         </form>
       </div>

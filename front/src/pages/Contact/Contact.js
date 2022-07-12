@@ -28,13 +28,13 @@ const Contact = () => {
       .then((res) => res.json())
       .then((data) => {
                 swal("Message sended!");
-                navigate("/", { replace: true });
+                window.location.reload();
               });
   };
   return (
     <>
-      <h1>Contact form</h1>
       <div className={styles.default}>
+      <h1>Contact form</h1>
         <form className={styles.contactform} onSubmit={handleSubmit}>
         <label className={styles.labels} htmlFor="nombre">Name:</label>
           <input className={styles.usuario}
